@@ -1,22 +1,44 @@
-
-// usage: log('inside coolFunc', this, arguments);
-// paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
-window.log = function(){
-  log.history = log.history || [];   // store logs to an array for reference
-  log.history.push(arguments);
-  if(this.console) {
-    arguments.callee = arguments.callee.caller;
-    var newarr = [].slice.call(arguments);
-    (typeof console.log === 'object' ? log.apply.call(console.log, console, newarr) : console.log.apply(console, newarr));
-  }
-};
-
-// make it safe to use console.log always
-(function(b){function c(){}for(var d="assert,clear,count,debug,dir,dirxml,error,exception,firebug,group,groupCollapsed,groupEnd,info,log,memoryProfile,memoryProfileEnd,profile,profileEnd,table,time,timeEnd,timeStamp,trace,warn".split(","),a;a=d.pop();){b[a]=b[a]||c}})((function(){try
-{console.log();return window.console;}catch(err){return window.console={};}})());
-
-
-// place any jQuery/helper plugins in here, instead of separate, slower script files.
+/*
+* jQuery.eraser v0.2
+* makes any image or canvas user-erasable
+*
+* Usage:
+*
+* $('#myImage').eraser(); // simple way
+*
+* $(#canvas').eraser( { size: 20 } ); // define brush size (default value is 40)
+*
+* $('#image').eraser( 'clear' ); // removes canvas content
+*
+* $('#image').eraser( 'reset' ); // revert back to original content
+*
+*
+* https://github.com/boblemarin/jQuery.eraser
+* http://minimal.be/lab/jQuery.eraser/
+*
+* Copyright (c) 2010 boblemarin emeric@minimal.be http://www.minimal.be
+* 
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+* 
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 (function( $ ){
 	var methods = {
