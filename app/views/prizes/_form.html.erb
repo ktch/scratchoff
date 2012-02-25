@@ -1,0 +1,33 @@
+<%= form_for(@prize) do |f| %>
+  <% if @prize.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@prize.errors.count, "error") %> prohibited this prize from being saved:</h2>
+
+      <ul>
+      <% @prize.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :odds %><br />
+    <%= f.text_field :odds %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br />
+    <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br />
+    <%= f.text_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

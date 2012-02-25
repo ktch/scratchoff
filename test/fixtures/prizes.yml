@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  odds: 1.5
+  amount: 1
+  image: MyString
+
+two:
+  name: MyString
+  odds: 1.5
+  amount: 1
+  image: MyString

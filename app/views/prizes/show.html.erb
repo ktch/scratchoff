@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @prize.name %>
+</p>
+
+<p>
+  <b>Odds:</b>
+  <%= @prize.odds %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @prize.amount %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= @prize.image %>
+</p>
+
+
+<%= link_to 'Edit', edit_prize_path(@prize) %> |
+<%= link_to 'Back', prizes_path %>
