@@ -9,4 +9,8 @@ class AdminsController < ActionController::Base
     @admin = Admin.find(params[:id])
   end
   
+  def new
+    @title = "Sign up"
+  end
+  
 end

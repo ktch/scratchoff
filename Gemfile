@@ -25,10 +25,11 @@ gem 'jquery-rails'
 group :development do
 	gem 'rspec-rails'
 	gem 'spork-rails'
-	gem 'annotate', '~> 2.4.1.beta' 
+	gem 'annotate', '~> 2.4.1.beta'
 end
 
 group :test do
 	gem 'rspec'
 	gem 'webrat'
+	gem 'factory_girl_rails'
 end
