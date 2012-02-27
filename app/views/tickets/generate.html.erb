@@ -1,0 +1,49 @@
+	<header>
+		<h3 id="percent">Scratch off the logo below for your chance to win!</h3>
+	</header>
+	
+	<section id="scratchoff">
+		<img id="latex" src="img/logo.png" />
+		<img id="prize" src="img/prize.png" />
+	</section>
+	
+	<section id="redemption">
+		<p>Congratulations! You've won! Come to section 440 to redeem your prize!</p>
+		<p><a href="#" onclick="reset(event);" class="win"> Redeem </a></p>
+	</section>
+
+	<script src='javascripts/jquery.eraser.js' type='text/javascript'></script>
+
+	<script type = 'text/javascript'>
+
+		function showRedeemButton() {
+			$('#redemption').delay(1500).animate({opacity: 1}, 1200, function(){});
+		}
+
+		function init(event) {
+			$("#latex").eraser({
+			    completeRatio: .5,
+			    completeFunction: showRedeemButton
+			});
+		}
+		
+		addEventListener( "load", init, false );
+
+		function remove(event) {
+			$("#latex").eraser('clear');
+			event.preventDefault();
+		}
+
+		function reset(event) {
+			$("#latex").eraser('reset');
+			event.preventDefault();
+		}
+
+	</script>
+
+  <script>
+    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));
+  </script>
