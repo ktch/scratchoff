@@ -106,6 +106,49 @@ describe Admin do
     it "should have an encrypted password attribute" do
       @admin.should respond_to(:encrypted_password)
     end
+    
+    it "should set the encrypted password attribute" do
+      @admin.encrypted_password.should_not be_blank
+    end
+    
+    it "should have a salt" do
+      @admin.should respond_to(:salt)
+    end
+    
+    describe "has_password? method" do
+      
+      it "should exist" do
+        @admin.should respond_to(:has_password?)
+      end
+      
+      it "should return true if the passwords match" do
+        @admin.has_password?(@attr[:password]).should be_true
+      end
+      
+      it "should return false if the passwords don't match" do
+        @admin.has_password?("invalid").should be_false        
+      end
+    end
+    
+    describe "authenticate method" do
+      
+      it "should exist" do
+        Admin.should respond_to(:authenticate)
+      end
+      
+      it "should return nil on email/password mismatch" do
+        Admin.authenticate(@attr[:email], "wrongpass").should be_nil
+      end
+      
+      it "should return nil for an email address with no admin associated" do
+        Admin.authenticate("bar@none.com", @attr[:password]).should be_nil
+      end
+      
+      it "should return the admin on email/password match" do
+        Admin.authenticate(@attr[:email], @attr[:password]).should == @admin
+      end
+    end
+    
   end
   
 end
