@@ -1,1 +1,5 @@
-<h1><%= @admin.name %>, <%= @admin.email %></h1>
+<header>
+	<%= image_tag @admin.logo_url.to_s, :title => @admin.name, :class => "logo" %>
+</header>
+
+<h1><%= @admin.name %></h1>

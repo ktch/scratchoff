@@ -19,6 +19,21 @@ describe AdminsController do
       assigns(:admin).should == @admin
     end
     
+    it "should have the right title" do
+      get :show, :id => @admin
+      response.should have_selector('title', :content => @admin.name)
+    end
+    
+    it "should have the right name" do
+      get :show, :id => @admin
+      response.should have_selector('h1', :content => @admin.name)
+    end
+    
+    it "should have a logo" do
+      get :show, :id => @admin
+      response.should have_selector('header>img', :class => "logo")
+    end
+    
   end
   
   describe "GET 'new'" do

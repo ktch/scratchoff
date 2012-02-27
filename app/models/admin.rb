@@ -2,6 +2,8 @@ class Admin < ActiveRecord::Base
   attr_accessor   :password
   attr_accessible :name, :email, :logo, :password, :password_confirmation
   
+  mount_uploader :logo, LogoUploader
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :name,      :presence   => true,
@@ -12,6 +14,7 @@ class Admin < ActiveRecord::Base
   validates :password,  :confirmation => true,
                         :presence     => true,
                         :length       => { :within => 6..40 }
+  # validates :logo,      :presence => true
 
   before_save :encrypt_password
   
