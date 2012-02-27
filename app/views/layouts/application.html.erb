@@ -1,27 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BPampm Scratchoff</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title><%= @title %></title>
   <%= csrf_meta_tags %>
-	<meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name='viewport' content='user-scalable=0' />
-
-  <link rel="stylesheet" href="stylesheets/style.css">
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="javascripts/libs/jquery-1.6.2.min.js"><\/script>')</script>
-	<script src="javascripts/plugins.js" type="text/javascript" charset="utf-8"></script>
-
-	<script type="text/javascript" src="http://use.typekit.com/fyu1vxq.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<%= render 'partials/header' %>
 	
 </head>
 <body onload="setTimeout(function() { window.scrollTo(0, 1) }, 100);">
@@ -29,7 +11,7 @@
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
 
-<%= yield %>
+	<%= yield %>
 
 </body>
 </html>
