@@ -1,4 +1,5 @@
 class PrizesController < ApplicationController
+  before_filter :authenticate_admin!
   # GET /prizes
   # GET /prizes.json
   def index

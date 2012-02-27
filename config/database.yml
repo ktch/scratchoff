@@ -1,9 +1,11 @@
 development:
   adapter: postgresql
   database: db/development
-  username: scratchoff
+  username: zach
+  password:
   host: localhost
-  encoding: UTF8
+  encoding: unicode
+  pool: 5
 
 test:
   adapter: postgresql
