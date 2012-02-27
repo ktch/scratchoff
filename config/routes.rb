@@ -4,5 +4,6 @@ MzScratch::Application.routes.draw do
     
   root :to => 'tickets#generate'
   resources :prizes
+  resources :admins
 
 end
