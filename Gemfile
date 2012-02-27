@@ -7,7 +7,6 @@ gem 'rails', '3.2.0'
 
 gem 'pg'
 gem 'carrierwave'
-gem 'devise'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,6 +25,7 @@ gem 'jquery-rails'
 group :development do
 	gem 'rspec-rails'
 	gem 'spork-rails'
+	gem 'annotate', '~> 2.4.1.beta' 
 end
 
 group :test do
