@@ -100,4 +100,22 @@ describe AdminsController do
     
   end
   
+  describe "authentication of edit/update actions" do
+    
+    before(:each) do
+      @admin = Factory(:admin)
+    end
+    
+    it "should deny access to 'edit'" do
+      get :edit, :id => @admin
+      response.should redirect_to(signin_path)
+      flash[:notice].should =~ /sign in/i
+    end
+    
+    it "should deny access to 'update'" do
+      put :update, :id => @admin, :admin => {}
+      response.should redirect_to(signin_path)
+    end
+    
+  end
 end

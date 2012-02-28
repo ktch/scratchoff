@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update] 
   
   def dashboard
     @title = "Scratchoff Dashboard"
@@ -32,14 +33,19 @@ class AdminsController < ApplicationController
   
   def update
     @admin = Admin.find(params[:id])
-
-    respond_to do |format|
-      if @admin.update_attributes(params[:admin])
-        format.html { redirect_to @admin, notice: 'Your account was successfully updated.' }
-      else
-        format.html { render action: "edit" }
-      end
+    if @admin.update_attributes(params[:admin])
+      # It worked
+    else
+      @title = "Update Account"
+      render 'edit'
     end
   end
+  
+  private
+    
+    def authenticate
+      flash[:notice] = "You must sign in to access this page."
+      redirect_to signin_path unless signed_in?
+    end
   
 end
