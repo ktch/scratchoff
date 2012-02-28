@@ -3,15 +3,20 @@
 <head>
   <title><%= @title %></title>
   <%= csrf_meta_tags %>
-	<%= render 'partials/header' %>
+	<%= stylesheet_link_tag "style" %>
 	
 </head>
 <body onload="setTimeout(function() { window.scrollTo(0, 1) }, 100);">
 	
+	<% flash.each do |key, value| %>
+		<div class="flash <%= key %>"><%= value %></div>
+	<% end %>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
 
 	<%= yield %>
+	
+	<%= debug(params) if Rails.env.development? %>
 
 </body>
 </html>

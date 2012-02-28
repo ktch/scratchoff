@@ -1,0 +1,11 @@
+<% if @admin.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@admin.errors.count, "error") %> prohibited this Admin from being registered</h2>
+		<p>There were problems with the following fields:</p>
+		<ul>
+		<% @admin.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+		</ul>
+	</div>
+<% end %>
