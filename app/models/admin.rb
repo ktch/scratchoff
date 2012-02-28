@@ -22,10 +22,16 @@ class Admin < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
-  def self.authenticate(email, submitted_password)
-    admin = find_by_email(email)
-    return nil if admin.nil?
-    return admin if admin.has_password?(submitted_password)
+  class << self
+    def authenticate(email, submitted_password)
+      admin = find_by_email(email)
+      (admin && admin.has_password?(submitted_password)) ? admin : nil
+    end
+  
+    def authenticate_with_salt(id, cookie_salt)
+      admin = find_by_id(id)
+      (admin && admin.salt == cookie_salt) ? admin : nil
+    end
   end
   
   private
@@ -58,5 +64,6 @@ end
 #  created_at         :datetime        not null
 #  updated_at         :datetime        not null
 #  encrypted_password :string(255)
+#  salt               :string(255)
 #
 

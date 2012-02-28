@@ -1,4 +1,4 @@
-class AdminsController < ActionController::Base
+class AdminsController < ApplicationController
   
   def dashboard
     @title = "Scratchoff Dashboard"
@@ -18,7 +18,7 @@ class AdminsController < ActionController::Base
   def create
     @admin = Admin.new(params[:admin])
     if @admin.save
-      flash
+      sign_in @admin
       redirect_to @admin, :flash => { :success => "Welcome to mobilezen Scratchoff!"}
     else
       @title = "Sign up"
