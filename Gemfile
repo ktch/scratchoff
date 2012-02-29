@@ -9,7 +9,7 @@ gem 'pg'
 gem 'rmagick'
 gem 'carrierwave'
 gem 'rdiscount'
-gem 'jquery-rails', '>= 1.0.12'
+gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required

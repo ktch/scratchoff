@@ -1,6 +1,6 @@
 MzScratch::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-
+  
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -59,7 +59,7 @@ MzScratch::Application.configure do
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners
-  config.active_support.deprecation = :notify
+  # config.active_support.deprecation = :notify
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

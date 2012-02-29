@@ -157,7 +157,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   factory_girl_rails
   faker
-  jquery-rails (>= 1.0.12)
+  jquery-rails
   pg
   rails (= 3.2.0)
   rdiscount
