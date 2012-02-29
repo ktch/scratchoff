@@ -1,5 +1,17 @@
 	<header>
-		<h3 id="percent">Scratch off the logo below for your chance to win!</h3>
+		
+		<aside id="legal"><h3>Terms and Conditions</h3>
+
+		<p>All entries are subject to the <a href="http://www.ampmhawks.com/rules">Official Rules</a>. View our <a href="https://mobilezen.com/BPHawksPrivacyPolicy">Privacy Policy</a>.</p>
+
+		<p>No additional text messages will be sent without a subsequent text message entry. <strong>1 message/query</strong>. Text <strong>STOP</strong>, <strong>CANCEL</strong>, <strong>QUIT</strong>, <strong>UNSUBSCRIBE</strong>, <strong>STOPALL</strong> or <strong>END</strong> to 99699 to stop receiving text messages. Text <strong>HELP</strong> to 99699 for help information. <strong>Message and data rates may apply</strong>.</p>
+		
+		<p>For further assistance, you may contact us by email at <a href="mailto:contactgaoil@gmail.com">contactgaoil@gmail.com</a>.</p>
+		
+		</aside>
+		
+		<h3>Scratch off the logo below for your chance to win!</h3>
+		
 	</header>
 	
 	<section id="scratchoff">
@@ -8,16 +20,34 @@
 	</section>
 	
 	<section id="redemption">
-		<p>Congratulations! You've won! Come to section 440 to redeem your prize!</p>
-		<p><a href="#" onclick="reset(event);" class="win"> Redeem </a></p>
+		<p>Congratulations! You've won an autographed Atlanta Hawks basketball!</p>
+		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
 	</section>
-
-	<script src='javascripts/jquery.eraser.js' type='text/javascript'></script>
+	
+	<div id="redeem_pane" class="modal hide fade in">
+		<p>Go to the prize counter at Phillips Arena Gate 12 before the end of the 4th Quarter to redeem your prize.</p>
+		<p class="warning">DO NOT TAP REDEEM UNTIL YOU ARE WITH THE REPRESENTATIVE AT THE PRIZE COUNTER!</p>
+		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
+		
+		<p>Brought to you by:</p>
+		<img class="bphawkslogo" src="img/bphawkslogo.jpg" alt="BPampm and Atlanta Hawks Logos" width="270">
+	</div>
+	
+	<script type="text/javascript" charset="utf-8">
+		$('#redeem_pane').modal({
+			backdrop: true,
+		  keyboard: true,
+			show: false
+		})
+		$('a.closemodal').click(function() {
+		   confirm('By tapping OK, you acknowledge that if you are not at the prize counter, you will not receive your prize.')
+		});
+	</script>
 
 	<script type = 'text/javascript'>
 
 		function showRedeemButton() {
-			$('#redemption').delay(1500).animate({opacity: 1}, 1200, function(){});
+			$('#redemption').delay(800).animate({opacity: 1}, 1200, function(){});
 		}
 
 		function init(event) {

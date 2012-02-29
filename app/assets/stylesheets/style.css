@@ -226,13 +226,109 @@ td { vertical-align: top; }
 			}
 
 			body { 
-				background: #FFF;
+				background: url('bpbg.jpg') top center no-repeat;
+				background-size:320px 740px;
 				color: #000;
 				margin: 5px;
 				padding: 0px;
 				margin-bottom: 45px;
 				text-align: center;
-				font-family: Helvetica, Arial;
+			}
+
+			.big {
+				font-size: 2em;
+				display: inline-block;
+				margin: 10px;
+			}
+			
+			#scratchoff {
+				position: relative;
+				margin:0 auto;
+				width: 200px;
+				height: 200px;
+			}
+			
+			#redeem_pane {
+				height:300px;
+				width:270px;
+				padding:15px 15px 30px 15px;
+				margin:-170px 0px 0px -150px;
+				display:none;
+			}
+			
+			img.bphawkslogo {
+				margin:-10px 0 15px 0;
+			}
+			
+			#redeem_pane p {
+				color:#333;
+				text-align:left;
+			}
+			
+			#redeem_pane p.warning {
+				color:#fe0018;
+			}
+			
+			#redeem_pane a {
+				margin:10px 0px;
+				text-align:left;
+			}
+
+			#prize {
+				position: absolute;
+				width: 200px;
+				top: 0px;
+				left: 0px;
+				z-index: 1;
+				-webkit-box-shadow: 0px 0px 20px 0px #000000;
+				-moz-box-shadow: 0px 0px 20px 0px #000000;
+				box-shadow: 0px 0px 20px 0px #000000;
+			}
+
+			#latex {
+				position: absolute;
+				width: 200px;
+				top: 0px;
+				left: 0px;
+				z-index: 2;
+			}
+			
+			header {
+				width: 290px;
+				padding:0px 15px 15px 15px;
+				margin:0 auto;
+			}
+			
+			header h3 {
+				margin: 20px 0px 5px 0px;
+				text-shadow: black 0.1em 0.1em 0.2em
+			}
+
+			#redemption {
+				width:250px;
+				margin:20px auto;
+				padding:15px;
+				-webkit-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				opacity: 0;
+				background:#ffffff;
+				-webkit-box-shadow: 0px 0px 20px 0px #000000;
+				-moz-box-shadow: 0px 0px 20px 0px #000000;
+				box-shadow: 0px 0px 20px 0px #000000;
+			}
+			
+			#redemption p {
+				color:#333333;
+			}
+
+			ul {
+				list-style:none;
+			}
+
+			#legal p, #legal h3 {
+				text-align:left;
+				font-weight:400;
 			}
 
 			a.win {
@@ -288,51 +384,7 @@ td { vertical-align: top; }
 					  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 			}
 
-			.big {
-				font-size: 2em;
-				display: inline-block;
-				margin: 10px;
-			}
-			#scratchoff { 
-				position: relative;
-				display: inline-block;
-				width: 200px;
-				height: 200px;
-			}
-
-			#prize {
-				position: absolute;
-				width: 200px;
-				top: 0px;
-				left: 0px;
-				z-index: 1;
-				-webkit-box-shadow: 0px 0px 20px 0px #707070;
-				-moz-box-shadow: 0px 0px 20px 0px #707070;
-				box-shadow: 0px 0px 20px 0px #707070;
-			}
-
-			#latex {
-				position: absolute;
-				width: 200px;
-				top: 0px;
-				left: 0px;
-				z-index: 2;
-			}
 			
-			header {
-				display: inline-block;
-				height: 85px;
-				width: 270px;
-			}
-
-			#redemption {
-				opacity: 0;
-			}
-
-			ul {
-				list-style:none;
-			}
-
 
 
 
