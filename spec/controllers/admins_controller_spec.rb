@@ -3,6 +3,21 @@ require 'spec_helper'
 describe AdminsController do
   render_views
   
+  describe "GET 'index'" do
+    
+    describe "for non-superadmins" do
+      it "should deny access" do
+        get :index
+        response.should redirect_to(dashboard_path)
+      end
+    end
+    
+  end
+  
+  describe "GET 'dashboard'" do
+    
+  end
+  
   describe "GET 'show'" do
     
     before(:each) do

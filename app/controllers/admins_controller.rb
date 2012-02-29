@@ -1,6 +1,12 @@
 class AdminsController < ApplicationController
+  before_filter :superauthenticate, :only => [:index]
   before_filter :authenticate, :only  => [:edit, :update]
   before_filter :correct_admin, :only => [:edit, :update]
+  
+  def index
+    @admins = Admin.all
+    @title = "mobilezen Scratchoff | All Campaigns"
+  end
   
   def dashboard
     @title = "Scratchoff Dashboard"
@@ -44,6 +50,10 @@ class AdminsController < ApplicationController
   end
   
   private
+    
+    def superauthenticate
+      go_to_dashboard unless signed_in?
+    end
     
     def authenticate
       flash[:notice] = "You must sign in to access this page."

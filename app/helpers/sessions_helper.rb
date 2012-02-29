@@ -40,6 +40,10 @@ module SessionsHelper
     redirect_to signin_path, :notice => "You must sign in to access this page."
   end
   
+  def go_to_dashboard
+    redirect_to(dashboard_path)
+  end
+  
   def store_location
     session[:return_to] = request.fullpath
   end
