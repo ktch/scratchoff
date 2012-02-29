@@ -106,16 +106,37 @@ describe AdminsController do
       @admin = Factory(:admin)
     end
     
-    it "should deny access to 'edit'" do
-      get :edit, :id => @admin
-      response.should redirect_to(signin_path)
-      flash[:notice].should =~ /sign in/i
+    describe "for non-signed-in admins" do
+    
+      it "should deny access to 'edit'" do
+        get :edit, :id => @admin
+        response.should redirect_to(signin_path)
+        flash[:notice].should =~ /sign in/i
+      end
+    
+      it "should deny access to 'update'" do
+        put :update, :id => @admin, :admin => {}
+        response.should redirect_to(signin_path)
+      end
     end
     
-    it "should deny access to 'update'" do
-      put :update, :id => @admin, :admin => {}
-      response.should redirect_to(signin_path)
+    describe "for signed-in admins" do
+      
+      before(:each) do
+        wrong_admin = Factory(:admin, :email => "user@example.net")
+        test_sign_in(wrong_admin)
+      end
+      
+      it "should require matching users for 'edit'" do
+        get :edit, :id => @admin
+        response.should redirect_to(root_path)
+      end
+      
+      it "should require matching users for 'update'" do
+        put :update, :id => @admin, :admin => {}
+        response.should redirect_to(root_path)
+      end
+      
     end
-    
   end
 end

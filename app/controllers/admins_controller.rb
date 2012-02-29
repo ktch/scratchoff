@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update] 
+  before_filter :authenticate, :only  => [:edit, :update]
+  before_filter :correct_admin, :only => [:edit, :update]
   
   def dashboard
     @title = "Scratchoff Dashboard"
@@ -29,12 +30,13 @@ class AdminsController < ApplicationController
   
   def edit
     @admin = Admin.find(params[:id])
+    @title = "Account Update"
   end
   
   def update
     @admin = Admin.find(params[:id])
     if @admin.update_attributes(params[:admin])
-      # It worked
+      redirect_to @user, :flash => { :success => "Profile updated" }
     else
       @title = "Update Account"
       render 'edit'
@@ -45,7 +47,12 @@ class AdminsController < ApplicationController
     
     def authenticate
       flash[:notice] = "You must sign in to access this page."
-      redirect_to signin_path unless signed_in?
+      deny_access unless signed_in?
+    end
+    
+    def correct_admin
+      @admin = Admin.find(params[:id])
+      redirect_to(root_path) unless current_admin?(@admin)
     end
   
 end

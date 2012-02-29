@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       render 'new'
     else
       sign_in admin
-      redirect_to admin
+      redirect_back_or(admin)
     end
   end
   
