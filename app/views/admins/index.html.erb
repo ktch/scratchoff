@@ -8,5 +8,9 @@
 				<%= image_tag admin.logo_url.to_s, :title => admin.name, :class => "logo" %> <%= admin.name %>
 			</li>
 		</a>
+	
+		<% if current_admin.super? %>	
+			<%= button_to "Delete", admin, :method => :delete, :confirm => "Are you sure you want to do this?", :title => "Delete #{admin.name}" %>
+		<% end %>
 	<% end %>
 </ul>

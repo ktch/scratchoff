@@ -1,16 +1,20 @@
 class AdminsController < ApplicationController
-  before_filter :superauthenticate, :only => [:index]
-  before_filter :authenticate, :only  => [:edit, :update]
-  before_filter :correct_admin, :only => [:edit, :update]
+  before_filter :superauthenticate, :only => [:index, :destroy]
+  before_filter :authenticate, :only  => [:edit, :update, :dashboard]
+  before_filter :correct_admin, :only => [:edit, :update, :dashboard]
   
   def index
-    @admins = Admin.all
-    @title = "mobilezen Scratchoff | All Campaigns"
+    if current_admin.super?
+      @admins = Admin.all
+      @title = "mobilezen Scratchoff | All Campaigns"
+    else
+      redirect_to dashboard_path(params[:id])
+    end
   end
   
   def dashboard
     @title = "Scratchoff Dashboard"
-    @admin = Admin.find(1)
+    @admin = Admin.find(params[:id])
   end
   
   def show
@@ -49,10 +53,19 @@ class AdminsController < ApplicationController
     end
   end
   
+  def destroy
+    Admin.find(params[:id]).destroy
+    redirect_to admins_path, :flash => { :flash => "Successfully deleted..." }
+  end
+  
   private
     
     def superauthenticate
-      go_to_dashboard unless signed_in?
+      if signed_in?
+        redirect_to(dashboard_path) unless current_admin.super?
+      else
+        redirect_to(signin_path)
+      end
     end
     
     def authenticate

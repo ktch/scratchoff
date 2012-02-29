@@ -6,9 +6,28 @@ describe AdminsController do
   describe "GET 'index'" do
     
     describe "for non-superadmins" do
+      
+      before(:each) do
+        @admin = Factory(:admin)
+        test_sign_in(@admin)
+      end
+      
       it "should deny access" do
         get :index
         response.should redirect_to(dashboard_path)
+      end
+    end
+    
+    describe "for superadmins" do
+      
+      before(:each) do
+        @superadmin = Factory(:admin, :super => true)
+        test_sign_in(@superadmin)
+      end
+      
+      it "should allow access" do
+        get :index
+        response.should be_success
       end
     end
     
@@ -154,4 +173,37 @@ describe AdminsController do
       
     end
   end
+  
+  describe "DELETE 'destroy'" do
+    
+    
+    describe "as a non-signed in admin" do
+      
+      before(:each) do
+        @admin = Factory(:admin)
+      end
+      
+      it "should deny access" do
+        delete :destroy, :id => @admin
+        response.should redirect_to(signin_path)
+      end
+    end
+    
+    describe "as a non-super admin" do
+      
+      before(:each) do
+        @admin = Factory(:admin)
+      end
+      
+      it "should protect the action" do
+        test_sign_in(@admin)
+        delete :destroy, :id => @admin
+        response.should redirect_to(dashboard_path)
+      end
+    end
+    
+    
+    
+  end
+  
 end

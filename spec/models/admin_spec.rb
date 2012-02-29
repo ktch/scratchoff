@@ -151,6 +151,27 @@ describe Admin do
     
   end
   
+  describe "superadmin attributes" do
+    
+    before(:each) do
+      @admin = Admin.create!(@attr)
+    end
+    
+    it "should respond to superadmin" do
+      @admin.should respond_to(:super)
+    end
+    
+    it "should not be a superadmin by default" do
+      @admin.should_not be_super
+    end
+      
+    it "should be convertible to a superadmin" do
+      @admin.toggle!(:super)
+      @admin.should be_super
+    end
+    
+  end
+  
 end
 # == Schema Information
 #
@@ -164,5 +185,6 @@ end
 #  updated_at         :datetime        not null
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  super              :boolean         default(FALSE)
 #
 
