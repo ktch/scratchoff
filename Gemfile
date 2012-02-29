@@ -28,7 +28,7 @@ group :development do
 	gem 'rspec-rails'
 	gem 'spork-rails'
 	gem 'annotate', '~> 2.4.1.beta'
-	gem 'faker'
+	# gem 'faker'
 end
 
 group :test do
