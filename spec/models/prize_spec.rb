@@ -32,6 +32,18 @@ describe Prize do
     end
   end
   
+  describe "validations" do
+    
+    it "should have an admin_id" do
+      Prize.new(@attr).should_not be_valid
+    end
+    
+    it "should require nonblank name" do
+      @admin.prizes.build(:name => "     ").should_not be_valid
+    end
+    
+  end
+  
 end
 # == Schema Information
 #

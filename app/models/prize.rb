@@ -1,5 +1,12 @@
 class Prize < ActiveRecord::Base
   belongs_to :admin
+  validates :name, :presence => true
+  validates :winmessage, :presence => true
+  validates :redeemmessage, :presence => true
+  validates :odds, :presence => true
+  validates :image, :presence => true
+  validates :admin_id, :presence => true
+  
   attr_accessible :name, :winmessage, :redeemmessage, :odds, :inventory, :image
   
   default_scope :order => 'prizes.created_at DESC'
