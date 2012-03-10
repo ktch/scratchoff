@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Admin do
   
   before(:each) do
-    @attr = { :name => "Example User", :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar" }
+    @attr = { :subdomain => "example", :name => "Example User", :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar" }
   end
   
   it "should create a new instance given a valid attribute" do

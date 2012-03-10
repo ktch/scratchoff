@@ -9,6 +9,7 @@ describe "Admins" do
       it "should not make a new admin" do
         lambda do
           visit new_admin_path
+          fill_in "Campaign Name",            :with => ""
           fill_in "Name",                     :with => ""
           fill_in "Email",                    :with => ""
           fill_in "Password",                 :with => ""
@@ -25,6 +26,7 @@ describe "Admins" do
       it "should make a new admin" do
         lambda do
           visit new_admin_path
+          fill_in "Campaign Name",            :with => "foo"
           fill_in "Name",                     :with => "Zach Phillips"
           fill_in "Email",                    :with => "zhphillips@gmail.com"
           fill_in "Password",                 :with => "foobar"

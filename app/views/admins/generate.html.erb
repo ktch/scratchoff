@@ -1,0 +1,79 @@
+	<header>
+		
+		<aside id="legal"><h3>Terms and Conditions</h3>
+
+		<p>All entries are subject to the <a href="http://www.ampmhawks.com/rules">Official Rules</a>. View our <a href="https://mobilezen.com/BPHawksPrivacyPolicy">Privacy Policy</a>.</p>
+
+		<p>No additional text messages will be sent without a subsequent text message entry. <strong>1 message/query</strong>. Text <strong>STOP</strong>, <strong>CANCEL</strong>, <strong>QUIT</strong>, <strong>UNSUBSCRIBE</strong>, <strong>STOPALL</strong> or <strong>END</strong> to 99699 to stop receiving text messages. Text <strong>HELP</strong> to 99699 for help information. <strong>Message and data rates may apply</strong>.</p>
+		
+		<p>For further assistance, you may contact us by email at <a href="mailto:contactgaoil@gmail.com">contactgaoil@gmail.com</a>.</p>
+		
+		</aside>
+		
+		<h3>Scratch off the logo below for your chance to win!</h3>
+		
+	</header>
+	
+	<section id="scratchoff">
+		<img id="latex" src="img/logo.png" />
+		<img id="prize" src="img/prize.png" />
+	</section>
+	
+	<section id="redemption">
+		<p>Congratulations! You've won an autographed Atlanta Hawks basketball!</p>
+		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
+	</section>
+	
+	<div id="redeem_pane" class="modal hide fade in">
+		<p>Go to the prize counter at Phillips Arena Gate 12 before the end of the 4th Quarter to redeem your prize.</p>
+		<p class="warning">DO NOT TAP REDEEM UNTIL YOU ARE WITH THE REPRESENTATIVE AT THE PRIZE COUNTER!</p>
+		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
+		
+		<p>Brought to you by:</p>
+		<img class="bphawkslogo" src="img/bphawkslogo.jpg" alt="BPampm and Atlanta Hawks Logos" width="270">
+	</div>
+	
+	<script type="text/javascript" charset="utf-8">
+		$('#redeem_pane').modal({
+			backdrop: true,
+		  keyboard: true,
+			show: false
+		})
+		$('a.closemodal').click(function() {
+		   confirm('By tapping OK, you acknowledge that if you are not at the prize counter, you will not receive your prize.')
+		});
+	</script>
+
+	<script type = 'text/javascript'>
+
+		function showRedeemButton() {
+			$('#redemption').delay(800).animate({opacity: 1}, 1200, function(){});
+		}
+
+		function init(event) {
+			$("#latex").eraser({
+			    completeRatio: .5,
+			    completeFunction: showRedeemButton
+			});
+		}
+		
+		addEventListener( "load", init, false );
+
+		function remove(event) {
+			$("#latex").eraser('clear');
+			event.preventDefault();
+		}
+
+		function reset(event) {
+			$("#latex").eraser('reset');
+			event.preventDefault();
+		}
+
+	</script>
+
+  <script>
+    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));
+  </script>

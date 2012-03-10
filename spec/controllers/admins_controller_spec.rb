@@ -88,7 +88,7 @@ describe AdminsController do
     describe "failure" do
       
       before(:each) do
-        @attr = { :name => "", :email => "", :password => "", :password_confirmation => ""}
+        @attr = { :subdomain => "", :name => "", :email => "", :password => "", :password_confirmation => ""}
       end
       
       it "should have the right title" do
@@ -111,7 +111,7 @@ describe AdminsController do
     describe "success" do
       
       before(:each) do
-        @attr = { :name => "New User", :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar"}
+        @attr = { :subdomain => "new", :name => "New User", :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar"}
       end
       
       it "should create an admin" do
