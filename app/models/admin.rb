@@ -1,4 +1,5 @@
 class Admin < ActiveRecord::Base
+  has_many :prizes, :dependent => :destroy
   attr_accessor   :password
   attr_accessible :name, :email, :logo, :password, :password_confirmation
   

@@ -1,5 +1,15 @@
 class Prize < ActiveRecord::Base
   belongs_to :admin
+  validates :name, :presence => true
+  validates :winmessage, :presence => true
+  validates :redeemmessage, :presence => true
+  validates :odds, :presence => true
+  validates :image, :presence => true
+  validates :admin_id, :presence => true
+  
+  attr_accessible :name, :winmessage, :redeemmessage, :odds, :inventory, :image
+  
+  default_scope :order => 'prizes.created_at DESC'
   
   # Chooses a random array element from the receiver based on the weights
   # provided. If _weights_ is nil, then each element is weighed equally.
@@ -41,15 +51,17 @@ class Prize < ActiveRecord::Base
   end
 end
 # == Schema Information
-#
 # Table name: prizes
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  odds       :float
-#  amount     :integer
-#  image      :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id            :integer         not null, primary key
+#  name          :string(255)
+#  winmessage    :text
+#  redeemmessage :text
+#  odds          :string(255)
+#  inventory     :integer
+#  image         :string(255)
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#  admin_id      :integer
 #
 

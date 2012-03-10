@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '3.2.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
 gem 'rmagick'
-gem 'carrierwave'
-gem 'jquery-rails'
+gem 'fog', '1.1.2'
+gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :branch => "0.5-stable"
+gem 'rdiscount'
+gem 'jquery-rails', '>= 1.0.12'
 gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required
@@ -24,14 +26,14 @@ group :assets do
 end
 
 group :development do
-	gem 'rspec-rails'
-	gem 'spork-rails'
-	gem 'annotate', '~> 2.4.1.beta'
-	# gem 'faker'
+  gem 'rspec-rails'
+  gem 'spork-rails'
+  gem 'annotate', '~> 2.4.1.beta'
+  gem 'faker'
 end
 
 group :test do
-	gem 'rspec'
-	gem 'webrat'
-	gem 'factory_girl_rails'
+  gem 'rspec'
+  gem 'webrat'
+  gem 'factory_girl_rails'
 end

@@ -172,6 +172,31 @@ describe Admin do
     
   end
   
+  describe "prize associations" do
+    
+    before(:each) do
+      @admin = Admin.create(@attr)
+      @pr1 = Factory(:prize, :admin => @admin, :created_at => 1.day.ago)
+      @pr2 = Factory(:prize, :admin => @admin, :created_at => 1.hour.ago)
+    end
+    
+    it "should have a prizes attribute" do
+      @admin.should respond_to(:prizes)
+    end
+    
+    it "should have the right prizes in the right order" do
+      @admin.prizes.should == [@pr2, @pr1]
+    end
+    
+    it "should destroy associated prizes" do
+      @admin.destroy
+      [@pr1, @pr2].each do |prize|
+        Prize.find_by_id(prize.id).should be_nil
+      end
+    end
+    
+  end
+  
 end
 # == Schema Information
 #
