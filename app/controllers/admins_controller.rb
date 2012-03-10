@@ -54,7 +54,7 @@ class AdminsController < ApplicationController
   end
   
   def destroy
-    Admin.find(params[:id]).destroy
+    @admin.destroy
     redirect_to admins_path, :flash => { :flash => "Successfully deleted..." }
   end
   

@@ -8,7 +8,7 @@ gem 'rails', '3.2.0'
 gem 'pg'
 gem 'rmagick'
 gem 'fog', '1.1.2'
-gem 'carrierwave'
+gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :branch => "0.5-stable"
 gem 'rdiscount'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'twitter-bootstrap-rails'

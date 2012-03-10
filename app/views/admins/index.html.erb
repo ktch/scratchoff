@@ -5,7 +5,7 @@
 	<% @admins.each do |admin| %>
 		<a href="<%= admin_path(admin) %>">
 			<li>
-				<%= image_tag admin.logo_url.url, :title => admin.name, :class => "logo" %> <%= admin.name %>
+				<%= image_tag admin.logo_url.to_s, :title => admin.name, :class => "logo" %> <%= admin.name %>
 			</li>
 		</a>
 	
