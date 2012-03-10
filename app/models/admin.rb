@@ -1,12 +1,14 @@
 class Admin < ActiveRecord::Base
   has_many :prizes, :dependent => :destroy
   attr_accessor   :password
-  attr_accessible :name, :email, :logo, :password, :password_confirmation
+  attr_accessible :name, :email, :logo, :password, :password_confirmation, :subdomain
   
   mount_uploader :logo, LogoUploader
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
+  validates :subdomain, :presence   => true,
+                        :length     => { :maximum => 17 }
   validates :name,      :presence   => true,
                         :length     => { :maximum => 50 }
   validates :email,     :presence   => true,

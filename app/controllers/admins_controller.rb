@@ -3,6 +3,16 @@ class AdminsController < ApplicationController
   before_filter :authenticate, :only  => [:edit, :update, :dashboard]
   before_filter :correct_admin, :only => [:edit, :update, :dashboard]
   
+  def generate
+    @title = "BPampm Scratchoff"
+    @campaign = Admin.find_by_subdomain!(request.subdomain)
+    cookies[:redeemed] = "not_redeemed"
+  end
+  
+  def marketing
+    @title ="Welcome to mobilezen Scratchoff!"
+  end
+  
   def index
     if current_admin.super?
       @admins = Admin.all
@@ -46,7 +56,7 @@ class AdminsController < ApplicationController
   def update
     @admin = Admin.find(params[:id])
     if @admin.update_attributes(params[:admin])
-      redirect_to @user, :flash => { :success => "Profile updated" }
+      redirect_to @admin, :flash => { :success => "Profile updated" }
     else
       @title = "Update Account"
       render 'edit'
