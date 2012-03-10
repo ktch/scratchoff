@@ -1,5 +1,4 @@
 class Prize < ActiveRecord::Base
-  belongs_to :admin
   
   # Chooses a random array element from the receiver based on the weights
   # provided. If _weights_ is nil, then each element is weighed equally.
@@ -51,5 +50,3 @@ end
 #  image      :string(255)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
-#
-

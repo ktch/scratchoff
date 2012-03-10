@@ -7,6 +7,7 @@ gem 'rails', '3.2.0'
 
 gem 'pg'
 gem 'rmagick'
+gem 'fog', '1.1.2'
 gem 'carrierwave'
 gem 'rdiscount'
 gem 'jquery-rails', '>= 1.0.12'
