@@ -1,3 +1,11 @@
+	<% if cookies[:redeemed] || cookies[:ticket] == "-1" %>
+		
+		<h3>Thank you for playing!</h3>
+	
+	<% elsif cookies[:ticket].to_i >= 1 %>
+	
+	<% @scritchoff = Prize.find(cookies[:ticket]) %>
+	
 	<header>
 		
 		<aside id="legal"><h3>Terms and Conditions</h3>
@@ -12,19 +20,19 @@
 	
 	<section id="scratchoff">
 		<%= image_tag @campaign.logo_url.to_s, :title => @campaign.subdomain, :id => "latex" %>
-		<%= image_tag @scratchoff.image_url.to_s, :title => @scratchoff.name, :id => "prize" %>
+		<%= image_tag @scritchoff.image_url.to_s, :title => @scritchoff.name, :id => "prize" %>
 	</section>
 	
 	<section id="redemption">
 		<p><%= raw @scratchoff.winmessage %></p>
-		<% if @scratchoff.winmessage.include? "Sorry" %>
+		<% if @scritchoff.winmessage.include? "Sorry" %>
 		<% else %>
 		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
 		<% end %>
 	</section>
 	
 	<div id="redeem_pane" class="modal hide fade in">
-		<p><%= @scratchoff.redeemmessage %></p>
+		<p><%= @scritchoff.redeemmessage %></p>
 		<p class="warning">DO NOT TAP REDEEM UNTIL YOU ARE WITH A PRIZE REPRESENTATIVE!</p>
 		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
 		
@@ -42,8 +50,10 @@
 		   var z = confirm('By tapping OK, you acknowledge that if you are not with a prize representative, you will not receive your prize.')
 			 if (z == true)
 				 {
-					alert("Thank you for playing")
+					alert("Thank you for playing!")
 					$.cookie('redeemed', 'true', { expires: 1 });
+					$.cookie('ticket', null);
+					$('a.win').remove();
 				 }
 			 else
 				 {
@@ -85,3 +95,99 @@
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
   </script>
+		
+	<% else %>
+	
+	<% cookies[:ticket] = { :value => @scratchoff.id, :expires => 2.days.from_now } %>
+	
+	<header>
+		
+		<aside id="legal"><h3>Terms and Conditions</h3>
+
+		<%= raw markdown @campaign.terms %>
+		
+		</aside>
+		
+		<h3>Scratch off the logo below for your chance to win!</h3>
+		
+	</header>
+	
+	<section id="scratchoff">
+		<%= image_tag @campaign.logo_url.to_s, :title => @campaign.subdomain, :id => "latex" %>
+		<%= image_tag @scratchoff.image_url.to_s, :title => @scratchoff.name, :id => "prize" %>
+	</section>
+	
+	<section id="redemption">
+		<p><%= raw @scratchoff.winmessage %></p>
+		<% if @scratchoff.winmessage.include? "Sorry" %>
+			<% cookies[:redeemed] = { :value => "true", :expires => 1.day.from_now } %>
+		<% else %>
+		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
+		<% end %>
+	</section>
+	
+	<div id="redeem_pane" class="modal hide fade in">
+		<p><%= @scratchoff.redeemmessage %></p>
+		<p class="warning">DO NOT TAP REDEEM UNTIL YOU ARE WITH A PRIZE REPRESENTATIVE!</p>
+		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
+		
+		<p>Brought to you by:</p>
+		<%= image_tag @campaign.sponsor_url.to_s, :title => @campaign.subdomain, :width => "270" %>
+	</div>
+	
+	<script type="text/javascript" charset="utf-8">
+		$('#redeem_pane').modal({
+			backdrop: true,
+		  keyboard: true,
+			show: false
+		})
+		$('a.closemodal').click(function() {
+		   var z = confirm('By tapping OK, you acknowledge that if you are not with a prize representative, you will not receive your prize.')
+			 if (z == true)
+				 {
+					alert("Thank you for playing!")
+					$.cookie('redeemed', 'true', { expires: 1 });
+					$('a.win').remove();
+				 }
+			 else
+				 {
+					alert("You can leave this page loaded and confirm later")
+				 }
+		});
+	</script>
+
+	<script type = 'text/javascript'>
+
+		function showRedeemButton() {
+			$('#redemption').delay(800).animate({opacity: 1}, 1200, function(){});
+		}
+
+		function init(event) {
+			$("#latex").eraser({
+			    completeRatio: .5,
+			    completeFunction: showRedeemButton
+			});
+		}
+		
+		addEventListener( "load", init, false );
+
+		function remove(event) {
+			$("#latex").eraser('clear');
+			event.preventDefault();
+		}
+
+		function reset(event) {
+			$("#latex").eraser('reset');
+			event.preventDefault();
+		}
+
+	</script>
+
+  <script>
+    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));
+  </script>
+
+<% end %>

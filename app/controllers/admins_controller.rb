@@ -19,7 +19,6 @@ class AdminsController < ApplicationController
                          :image => "img/loss.png" )
     @choices << @loser
     @scratchoff = @choices.weighted_random(@weight)
-    cookies[:ticket] = { :value => @scratchoff, :expires => 30.seconds.from_now }
     @scratchoff.inventory -= 1 unless @scratchoff.inventory.zero?
     @scratchoff.save
     # cookies[:redeemed] = "not_redeemed"

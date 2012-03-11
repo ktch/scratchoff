@@ -1,6 +1,8 @@
 MzScratch::Application.routes.draw do
-  
+  require 'cookies_detection'
   require 'subdomain'
+  
+  match '/cookies_test', :to => 'application#cookie_test'
   
   resources :admins
   resources :prizes
