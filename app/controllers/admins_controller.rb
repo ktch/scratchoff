@@ -1,12 +1,12 @@
 class AdminsController < ApplicationController
-  before_filter :superauthenticate, :only => [:index, :destroy]
-  before_filter :authenticate, :only  => [:edit, :update, :dashboard]
+  # before_filter :is_campaign?
+  before_filter :authenticate, :only  => [:index, :edit, :update, :destroy, :dashboard]
   before_filter :correct_admin, :only => [:edit, :update, :dashboard]
+  before_filter :superauthenticate, :only => :destroy
   
   def generate
     @title = "BPampm Scratchoff"
-    @campaign = Admin.find_by_subdomain!(request.subdomain)
-    cookies[:redeemed] = "not_redeemed"
+    # cookies[:redeemed] = "not_redeemed"
   end
   
   def marketing
@@ -23,8 +23,9 @@ class AdminsController < ApplicationController
   end
   
   def dashboard
-    @title = "Scratchoff Dashboard"
-    @admin = Admin.find(params[:id])
+    @admin = current_admin
+    @prizes = @admin.prizes
+    @title = "Scratchoff Dashboard - #{@admin.subdomain}"
   end
   
   def show
@@ -70,22 +71,14 @@ class AdminsController < ApplicationController
   
   private
     
-    def superauthenticate
-      if signed_in?
-        redirect_to(dashboard_path) unless current_admin.super?
-      else
-        redirect_to(signin_path)
-      end
-    end
-    
-    def authenticate
-      flash[:notice] = "You must sign in to access this page."
-      deny_access unless signed_in?
-    end
-    
     def correct_admin
       @admin = Admin.find(params[:id])
-      redirect_to(root_path) unless current_admin?(@admin)
+      redirect_to(signin_path) unless current_admin?(@admin)
+    end
+    
+    def superauthenticate
+      @admin = Admin.find(params[:id])
+      redirect_to(signin_path) if !current_admin.super? || current_admin?(@admin)
     end
   
 end

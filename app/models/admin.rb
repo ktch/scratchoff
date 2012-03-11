@@ -8,6 +8,8 @@ class Admin < ActiveRecord::Base
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :subdomain, :presence   => true,
+                        :uniqueness => { :case_sensitive => false },
+                        # :format     => { :with => email_regex },
                         :length     => { :maximum => 17 }
   validates :name,      :presence   => true,
                         :length     => { :maximum => 50 }

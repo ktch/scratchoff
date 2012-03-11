@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe "Paths" do
-  it "should have a homepage at /" do
-    get '/'
-    response.should have_selector('title', :content => 'Welcome')
-  end
+#   it "should have a homepage at /" do
+#     get '/'
+#     response.should have_selector('title', :content => 'Welcome')
+#   end
   
   # it "should have an admin dashboard at /dashboard" do
   #     get '/dashboard'

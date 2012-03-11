@@ -2,4 +2,6 @@
 	<%= image_tag @admin.logo_url.to_s, :title => @admin.name, :class => "logo" %>
 </header>
 
-<h1><%= @admin.name %></h1>
+<h1><%= @admin.subdomain %></h1>
+<p><%= @admin.name %></p>
+<p><%= @admin.email %></p>

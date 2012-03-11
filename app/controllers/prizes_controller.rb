@@ -1,56 +1,33 @@
 class PrizesController < ApplicationController
-  before_filter :authenticate_admin!
+  include PrizesHelper
+  
+  # before_filter :is_campaign?
+  before_filter :authenticate
+  # before_filter :correct_admin, :only => [:edit, :update]
   # GET /prizes
   # GET /prizes.json
-  def index
-    @prizes = Prize.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @prizes }
-    end
-  end
-
-  # GET /prizes/1
-  # GET /prizes/1.json
-  def show
-    @prize = Prize.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @prize }
-    end
-  end
-
-  # GET /prizes/new
-  # GET /prizes/new.json
-  def new
-    @prize = Prize.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @prize }
-    end
-  end
-
   # GET /prizes/1/edit
+  
+  def new
+    @prize = Prize.new if signed_in?
+  end
+  
   def edit
+    @prize = Prize.find(params[:id])
+  end
+  
+  def show
     @prize = Prize.find(params[:id])
   end
 
   # POST /prizes
   # POST /prizes.json
   def create
-    @prize = Prize.new(params[:prize])
-
-    respond_to do |format|
-      if @prize.save
-        format.html { redirect_to @prize, notice: 'Prize was successfully created.' }
-        format.json { render json: @prize, status: :created, location: @prize }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @prize.errors, status: :unprocessable_entity }
-      end
+    @prize = current_admin.prizes.build(params[:prize])
+    if @prize.save
+      redirect_to @prize, :flash => { :success => "Prize created" }
+    else
+      render 'sessions/new'
     end
   end
 
@@ -58,15 +35,11 @@ class PrizesController < ApplicationController
   # PUT /prizes/1.json
   def update
     @prize = Prize.find(params[:id])
-
-    respond_to do |format|
-      if @prize.update_attributes(params[:prize])
-        format.html { redirect_to @prize, notice: 'Prize was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @prize.errors, status: :unprocessable_entity }
-      end
+    if @prize.update_attributes(params[:prize])
+      redirect_to @prize, :flash => { :success => "Prize updated" }
+    else
+      @title = "Update Prize"
+      render 'edit'
     end
   end
 
@@ -76,9 +49,6 @@ class PrizesController < ApplicationController
     @prize = Prize.find(params[:id])
     @prize.destroy
 
-    respond_to do |format|
-      format.html { redirect_to prizes_url }
-      format.json { head :no_content }
-    end
   end
+  
 end

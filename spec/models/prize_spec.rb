@@ -34,8 +34,16 @@ describe Prize do
   
   describe "validations" do
     
+    before(:each) do
+      @prize = @admin.prizes.create(@attr)
+    end
+    
     it "should have an admin_id" do
       Prize.new(@attr).should_not be_valid
+    end
+    
+    it "should have calculated its own weight" do
+      @prize.weight.should_not be_nil
     end
     
     it "should require nonblank name" do

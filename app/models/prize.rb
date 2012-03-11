@@ -4,13 +4,31 @@ class Prize < ActiveRecord::Base
   validates :winmessage, :presence => true
   validates :redeemmessage, :presence => true
   validates :odds, :presence => true
-  validates :image, :presence => true
   validates :admin_id, :presence => true
   
-  attr_accessible :name, :winmessage, :redeemmessage, :odds, :inventory, :image
+  attr_accessible :name, :winmessage, :redeemmessage, :odds, :inventory, :image, :weight
   
   default_scope :order => 'prizes.created_at DESC'
   
+  mount_uploader :image, ImageUploader
+  
+  before_save :calculate_odds
+  before_update :calculate_odds
+
+  def entry
+    @campaign = Admin.find_by_subdomain!(request.subdomain)
+    @odds = @campaign.prizes.map(&:odds)
+    @prizes = @campaign.prizes
+    
+  end
+  
+  def calculate_odds
+    odds = self.odds.split(':')
+    overunder = odds.collect{|s| s.to_i}
+    weight = overunder.first / (overunder.first + overunder.last).to_f
+    self.weight = weight
+  end
+
   # Chooses a random array element from the receiver based on the weights
   # provided. If _weights_ is nil, then each element is weighed equally.
   # 
@@ -37,7 +55,7 @@ class Prize < ActiveRecord::Base
   #   ['dog', 'cat', 'hippopotamus'].random(:length) #=> "hippopotamus"
   #   ['dog', 'cat', 'hippopotamus'].random(:length) #=> "hippopotamus"
   #   ['dog', 'cat', 'hippopotamus'].random(:length) #=> "cat"
-  def random(weights=nil)
+  def weighted_random(weights=nil)
     return random(map {|n| n.send(weights)}) if weights.is_a? Symbol
     
     weights ||= Array.new(length, 1.0)

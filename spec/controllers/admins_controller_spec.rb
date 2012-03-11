@@ -35,12 +35,25 @@ describe AdminsController do
   
   describe "GET 'dashboard'" do
     
+    before(:each) do
+      @admin = Factory(:admin)
+      test_sign_in(@admin)
+    end
+    
+    it "should show the admin's prizes" do
+      pr1 = Factory(:prize, :admin => @admin)
+      pr2 = Factory(:prize, :admin => @admin)
+      get :dashboard, :id => @admin
+      response.should have_selector('div.prizelisting', :content => pr1.name)
+    end
+    
   end
   
   describe "GET 'show'" do
     
     before(:each) do
       @admin = Factory(:admin)
+      test_sign_in(@admin)
     end
     
     it "should be successful" do
@@ -60,7 +73,7 @@ describe AdminsController do
     
     it "should have the right name" do
       get :show, :id => @admin
-      response.should have_selector('h1', :content => @admin.name)
+      response.should have_selector('h1', :content => @admin.subdomain)
     end
     
     it "should have a logo" do
@@ -71,6 +84,11 @@ describe AdminsController do
   end
   
   describe "GET 'new'" do
+    
+    before(:each) do
+      @admin = Factory(:admin)
+      test_sign_in(@admin)
+    end
     
     it "should be successful" do
       get :new
@@ -137,7 +155,8 @@ describe AdminsController do
   describe "authentication of edit/update actions" do
     
     before(:each) do
-      @admin = Factory(:admin)
+      @admin = Factory(:admin, :email => "user4@example.net",
+                               :subdomain => "mygod")
     end
     
     describe "for non-signed-in admins" do
@@ -157,18 +176,19 @@ describe AdminsController do
     describe "for signed-in admins" do
       
       before(:each) do
-        wrong_admin = Factory(:admin, :email => "user@example.net")
+        wrong_admin = Factory(:admin, :email => "wrong5@example.net",
+                                      :subdomain => "mygoodness")
         test_sign_in(wrong_admin)
       end
       
       it "should require matching users for 'edit'" do
         get :edit, :id => @admin
-        response.should redirect_to(root_path)
+        response.should redirect_to(signin_path)
       end
       
       it "should require matching users for 'update'" do
         put :update, :id => @admin, :admin => {}
-        response.should redirect_to(root_path)
+        response.should redirect_to(signin_path)
       end
       
     end
@@ -178,10 +198,6 @@ describe AdminsController do
     
     
     describe "as a non-signed in admin" do
-      
-      before(:each) do
-        @admin = Factory(:admin)
-      end
       
       it "should deny access" do
         delete :destroy, :id => @admin
@@ -198,7 +214,7 @@ describe AdminsController do
       it "should protect the action" do
         test_sign_in(@admin)
         delete :destroy, :id => @admin
-        response.should redirect_to(dashboard_path)
+        response.should redirect_to(signin_path)
       end
     end
     

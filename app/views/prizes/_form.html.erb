@@ -19,13 +19,21 @@
     <%= f.label :odds %><br />
     <%= f.text_field :odds %>
   </div>
+	<div class="field">
+    <%= f.label :winmessage %><br />
+    <%= f.text_field :winmessage %>
+  </div>
+	<div class="field">
+    <%= f.label :redeemmessage %><br />
+    <%= f.text_field :redeemmessage %>
+  </div>
   <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.number_field :amount %>
+    <%= f.label :inventory %><br />
+    <%= f.number_field :inventory %>
   </div>
   <div class="field">
     <%= f.label :image %><br />
-    <%= f.text_field :image %>
+    <%= f.file_field :image %>
   </div>
   <div class="actions">
     <%= f.submit %>
