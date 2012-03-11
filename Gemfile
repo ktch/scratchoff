@@ -12,6 +12,7 @@ gem 'carrierwave', :git => 'git://github.com/jnicklas/carrierwave.git', :branch 
 gem 'rdiscount'
 gem 'jquery-rails', '>= 1.0.12'
 gem 'twitter-bootstrap-rails'
+gem 'faker'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,9 +28,7 @@ end
 
 group :development do
   gem 'rspec-rails'
-  gem 'spork-rails'
   gem 'annotate', '~> 2.4.1.beta'
-  gem 'faker'
 end
 
 group :test do
