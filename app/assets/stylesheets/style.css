@@ -330,6 +330,15 @@ td { vertical-align: top; }
 				text-align:left;
 				font-weight:400;
 			}
+			
+			#legal p {
+				font-size:.7em;
+				line-height:1.4em;
+			}
+			
+			#legal h3 {
+				font-size:1em;
+			}
 
 			a.win {
 				cursor: pointer;

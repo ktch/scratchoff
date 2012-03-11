@@ -2,6 +2,9 @@
 	<%= image_tag @admin.logo_url.to_s, :title => @admin.name, :class => "logo" %>
 </header>
 
-<h1><%= @admin.subdomain %></h1>
+<h2><%= link_to 'Edit Campaign', edit_admin_path(params[:id]) %> | <%= link_to 'Edit Prizes', prizes_path %></h2>
+
+<h1>Subdomain: <%= @admin.subdomain %></h1>
 <p><%= @admin.name %></p>
 <p><%= @admin.email %></p>
+

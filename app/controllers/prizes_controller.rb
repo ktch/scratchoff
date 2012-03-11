@@ -8,6 +8,10 @@ class PrizesController < ApplicationController
   # GET /prizes.json
   # GET /prizes/1/edit
   
+  def index
+    @prizes = current_admin.prizes.all
+  end
+  
   def new
     @prize = Prize.new if signed_in?
   end
@@ -48,7 +52,7 @@ class PrizesController < ApplicationController
   def destroy
     @prize = Prize.find(params[:id])
     @prize.destroy
-
+    redirect_to prizes_path
   end
   
 end

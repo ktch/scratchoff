@@ -2,11 +2,7 @@
 		
 		<aside id="legal"><h3>Terms and Conditions</h3>
 
-		<p>All entries are subject to the <a href="http://www.ampmhawks.com/rules">Official Rules</a>. View our <a href="https://mobilezen.com/BPHawksPrivacyPolicy">Privacy Policy</a>.</p>
-
-		<p>No additional text messages will be sent without a subsequent text message entry. <strong>1 message/query</strong>. Text <strong>STOP</strong>, <strong>CANCEL</strong>, <strong>QUIT</strong>, <strong>UNSUBSCRIBE</strong>, <strong>STOPALL</strong> or <strong>END</strong> to 99699 to stop receiving text messages. Text <strong>HELP</strong> to 99699 for help information. <strong>Message and data rates may apply</strong>.</p>
-		
-		<p>For further assistance, you may contact us by email at <a href="mailto:contactgaoil@gmail.com">contactgaoil@gmail.com</a>.</p>
+		<%= raw markdown @campaign.terms %>
 		
 		</aside>
 		
@@ -15,13 +11,16 @@
 	</header>
 	
 	<section id="scratchoff">
-		<img id="latex" src="img/logo.png" />
-		<img id="prize" src="img/prize.png" />
+		<%= image_tag @campaign.logo_url.to_s, :title => @campaign.subdomain, :id => "latex" %>
+		<%= image_tag @scratchoff.image_url.to_s, :title => @scratchoff.name, :id => "prize" %>
 	</section>
 	
 	<section id="redemption">
-		<p>Congratulations! You've won an autographed Atlanta Hawks basketball!</p>
+		<p><%= raw @scratchoff.winmessage %></p>
+		<% if @scratchoff.winmessage.include? "Sorry" %>
+		<% else %>
 		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
+		<% end %>
 	</section>
 	
 	<div id="redeem_pane" class="modal hide fade in">
@@ -30,7 +29,7 @@
 		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
 		
 		<p>Brought to you by:</p>
-		<img class="bphawkslogo" src="img/bphawkslogo.jpg" alt="BPampm and Atlanta Hawks Logos" width="270">
+		<%= image_tag @campaign.sponsor_url.to_s, :title => @campaign.subdomain, :width => "270" %>
 	</div>
 	
 	<script type="text/javascript" charset="utf-8">
@@ -40,7 +39,16 @@
 			show: false
 		})
 		$('a.closemodal').click(function() {
-		   confirm('By tapping OK, you acknowledge that if you are not at the prize counter, you will not receive your prize.')
+		   var z = confirm('By tapping OK, you acknowledge that if you are not with a prize representative, you will not receive your prize.')
+			 if (z == true)
+				 {
+					alert("Thank you for playing")
+					$.cookie('redeemed', 'true', { expires: 1 });
+				 }
+			 else
+				 {
+					alert("You can leave this page loaded and confirm later")
+				 }
 		});
 	</script>
 

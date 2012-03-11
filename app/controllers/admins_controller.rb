@@ -3,14 +3,23 @@ class AdminsController < ApplicationController
   before_filter :authenticate, :only  => [:index, :edit, :update, :destroy, :dashboard]
   before_filter :correct_admin, :only => [:edit, :update, :dashboard]
   before_filter :superauthenticate, :only => :destroy
-  helper_method :weighted_random
   
   def generate
     @title = "BPampm Scratchoff"
     @campaign = Admin.find_by_subdomain!(request.subdomain)
     @choices = @campaign.prizes.where("inventory != 0")
+    @overall = @choices.count + 1
     @weight = @choices.map(&:weight)
+    @winner = @weight.inject(:+)
+    @weight << @overall - @winner
+    @loser = Prize.new(  :name => "loss",
+                         :winmessage => "#{@campaign.losemessage}",
+                         :redeemmessage => "losing ticket",
+                         :inventory => 1,
+                         :image => "img/loss.png" )
+    @choices << @loser
     @scratchoff = @choices.weighted_random(@weight)
+    cookies[:ticket] = { :value => @scratchoff, :expires => 30.seconds.from_now }
     @scratchoff.inventory -= 1 unless @scratchoff.inventory.zero?
     @scratchoff.save
     # cookies[:redeemed] = "not_redeemed"

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %></title>
+  <%= csrf_meta_tags %>
+	<%= stylesheet_link_tag 'bootstrap.min' %>
+	<%= stylesheet_link_tag 'adminstyle' %>
+	<%= javascript_include_tag 'application' %>
+
+	<script type="text/javascript" src="http://use.typekit.com/fkg0mwe.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	
+</head>
+<body onload="setTimeout(function() { window.scrollTo(0, 1) }, 100);">
+	
+	<% flash.each do |key, value| %>
+		<div class="flash <%= key %>"><%= value %></div>
+	<% end %>
+
+	<%= yield %>
+	
+	<%= debug(params) if Rails.env.development? %>
+
+</body>
+</html>

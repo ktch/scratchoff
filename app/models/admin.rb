@@ -1,8 +1,9 @@
 class Admin < ActiveRecord::Base
   has_many :prizes, :dependent => :destroy
   attr_accessor   :password
-  attr_accessible :name, :email, :logo, :password, :password_confirmation, :subdomain
+  attr_accessible :name, :email, :logo, :password, :password_confirmation, :subdomain, :terms, :sponsor, :losemessage
   
+  mount_uploader :sponsor, SponsorUploader
   mount_uploader :logo, LogoUploader
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -1,4 +1,4 @@
-<h1>Listing prizes</h1>
+<h1>Campaign Dashboard</h1>
 
 <table>
   <tr>
@@ -16,14 +16,14 @@
     <td><%= prize.name %></td>
     <td><%= prize.odds %></td>
     <td><%= prize.inventory %></td>
-    <td><%= prize.image %></td>
+    <td><%= image_tag prize.image_url.to_s, :title => prize.name, :class => "thumb" %></td>
     <td><%= link_to 'Show', prize %></td>
     <td><%= link_to 'Edit', edit_prize_path(prize) %></td>
-    <td><%= link_to 'Destroy', prize, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', prize, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Prize', new_prize_path %>
+<h2><%= link_to 'New Prize', new_prize_path %> | <%= link_to 'Edit Campaign', edit_admin_path(current_admin) %></h2>
