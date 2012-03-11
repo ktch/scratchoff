@@ -3,9 +3,16 @@ class AdminsController < ApplicationController
   before_filter :authenticate, :only  => [:index, :edit, :update, :destroy, :dashboard]
   before_filter :correct_admin, :only => [:edit, :update, :dashboard]
   before_filter :superauthenticate, :only => :destroy
+  helper_method :weighted_random
   
   def generate
     @title = "BPampm Scratchoff"
+    @campaign = Admin.find_by_subdomain!(request.subdomain)
+    @choices = @campaign.prizes.where("inventory != 0")
+    @weight = @choices.map(&:weight)
+    @scratchoff = @choices.weighted_random(@weight)
+    @scratchoff.inventory -= 1 unless @scratchoff.inventory.zero?
+    @scratchoff.save
     # cookies[:redeemed] = "not_redeemed"
   end
   

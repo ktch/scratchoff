@@ -10,7 +10,7 @@ namespace :db do
                   :password => "1812war",
                   :password_confirmation => "1812war")
     superadmin.toggle!(:super)
-    5.times do |n|
+    3.times do |n|
       name = Faker::Name.name
       email = "example-#{n+1}@example.com"
       password = "password"
@@ -22,8 +22,8 @@ namespace :db do
     end
     
     Admin.all.each do |admin|
-      5.times do
-        admin.prizes.create!(:name => Faker::Company,
+      3.times do
+        admin.prizes.create!(:name => Faker::Company.name,
                              :winmessage => Faker::Lorem.sentence(25),
                              :redeemmessage => Faker::Lorem.sentence(13),
                              :odds => "500:1000",

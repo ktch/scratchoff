@@ -1,4 +1,4 @@
-module PrizesHelper
+class Array
   
   def weighted_random(weights=nil)
     return random(map {|n| n.send(weights)}) if weights.is_a? Symbol
