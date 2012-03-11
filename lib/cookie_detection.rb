@@ -14,7 +14,7 @@
 module CookieDetection
  
   def self.included(base)
-    base.before_filter :cookies_required, :except => ["cookie_test"]
+    base.before_filter :cookies_required, :only => :generate
   end
  
   # checks for presence of "cookie_test" cookie
