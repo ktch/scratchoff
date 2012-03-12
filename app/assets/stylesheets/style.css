@@ -224,9 +224,13 @@ td { vertical-align: top; }
 			* {
 				font-weight: bold;
 			}
-
+			
+			html {
+				background-color:#000;
+			}
+			
 			body { 
-				background: url('bpbg.jpg') top center no-repeat;
+				background: url('bpbg.jpg') bottom center no-repeat;
 				background-size:320px 740px;
 				color: #000;
 				margin: 5px;
