@@ -226,12 +226,11 @@ td { vertical-align: top; }
 			}
 			
 			html {
-				background-color:#000;
+				background: #000 url('bpbg.jpg') center bottom no-repeat;
+				background-size:320px;
 			}
 			
-			body { 
-				background: url('bpbg.jpg') bottom center no-repeat;
-				background-size:320px;
+			body {
 				color: #000;
 				margin: 5px;
 				padding: 0px;
