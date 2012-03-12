@@ -1,6 +1,6 @@
 	<% if cookies[:redeemed] || cookies[:ticket] == "-1" %>
 		
-		<h3>Thank you for playing!</h3>
+		<h3><%= raw markdown @campaign.thankyou %></a></h3>
 	
 	<% elsif cookies[:ticket].to_i >= 1 %>
 	
@@ -51,7 +51,7 @@
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					$.cookie('redeemed', 'true', { expires: 1 });
+					// $.cookie('redeemed', 'true', { expires: 1 });
 					$.cookie('ticket', null);
 					$('a.win').remove();
 				 }
@@ -98,7 +98,7 @@
 		
 	<% else %>
 	
-	<% cookies[:ticket] = { :value => @scratchoff.id, :expires => 2.days.from_now } %>
+	<% # cookies[:ticket] = { :value => @scratchoff.id, :expires => 10.seconds.from_now } %>
 	
 	<header>
 		
@@ -120,7 +120,7 @@
 	<section id="redemption">
 		<p><%= raw @scratchoff.winmessage %></p>
 		<% if @scratchoff.winmessage.include? "Sorry" %>
-			<% cookies[:redeemed] = { :value => "true", :expires => 1.day.from_now } %>
+			<% # cookies[:redeemed] = { :value => "true", :expires => 1.day.from_now } %>
 		<% else %>
 		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
 		<% end %>
@@ -146,7 +146,7 @@
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					$.cookie('redeemed', 'true', { expires: 1 });
+					// $.cookie('redeemed', 'true', { expires: 1 });
 					$('a.win').remove();
 				 }
 			 else

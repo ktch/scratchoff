@@ -1,7 +1,7 @@
 class Admin < ActiveRecord::Base
   has_many :prizes, :dependent => :destroy
   attr_accessor   :password
-  attr_accessible :name, :email, :logo, :password, :password_confirmation, :subdomain, :terms, :sponsor, :losemessage
+  attr_accessible :name, :email, :logo, :password, :password_confirmation, :subdomain, :terms, :sponsor, :losemessage, :thankyou, :logo_cache, :sponsor_cache, :pagetitle
   
   mount_uploader :sponsor, SponsorUploader
   mount_uploader :logo, LogoUploader

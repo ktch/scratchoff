@@ -6,7 +6,8 @@ CarrierWave.configure do |config|
     :aws_secret_access_key => "soHnvioMMbiXrwxwfjCi3HBLUJbUE3hUfaJOreq/",
   }
   config.fog_directory = "scratchoff"
-
   # use only one of the following 2 settings
   config.fog_host = "http://scratchoff.s3.amazonaws.com" # for no cloudfront
+  
+  config.cache_dir = "#{Rails.root}/tmp/uploads"
 end

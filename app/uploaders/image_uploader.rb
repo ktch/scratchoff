@@ -36,6 +36,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :scale => [50, 50]
   # end
+  
+  def default_url
+    "http://scratchoff.s3.amazonaws.com/uploads/" + [version_name, "loss.png"].compact.join('_')
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

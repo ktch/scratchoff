@@ -1,19 +1,27 @@
 <%= form_for @admin, :html => {:multipart => true} do |f| %>
 	<div class="field">
-    <%= f.label :subdomain, "Campaign Name" %><br />
+    <%= f.label :subdomain, "Campaign Name (Subdomain)" %><br />
     <%= f.text_field :subdomain %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br />
+	<div class="field">
+    <%= f.label :logo, "Scratchoff Cover Logo" %><br />
+		<%= image_tag(@admin.logo_url) if @admin.logo? %>
+    <%= f.file_field :logo %>
+		<%= f.hidden_field :logo_cache %>
+  </div>
+	<div class="field">
+    <%= f.label :pagetitle, "Page Title" %><br />
+    <%= f.text_field :pagetitle %>
+  </div>
+  
+
+	<div class="field">
+    <%= f.label :name, "Administrator Name" %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :logo, "Scratchoff Cover Logo" %><br />
-    <%= f.file_field :logo %>
   </div>
   <div class="field">
     <%= f.label :password %><br />
@@ -22,7 +30,9 @@
 	<div class="field">
     <%= f.label :password_confirmation, "Confirm Password" %><br />
     <%= f.password_field :password_confirmation %>
-  </div>
+  </div>	
+	
+
 	<div class="field">
     <%= f.label :terms, "Terms and Conditions" %><br />
     <%= f.text_area :terms %>
@@ -32,9 +42,17 @@
     <%= f.text_area :losemessage %>
   </div>
 	<div class="field">
-    <%= f.label :sponsor, "Sponsor Logo" %><br />
-    <%= f.file_field :sponsor %>
+    <%= f.label :thankyou, "Thank You Message" %><br />
+    <%= f.text_area :thankyou %>
   </div>
+	<div class="field">
+    <%= f.label :sponsor, "Sponsor Logo" %><br />
+		<%= image_tag(@admin.sponsor_url) if @admin.sponsor? %>
+    <%= f.file_field :sponsor %>
+		<%= f.hidden_field :sponsor_cache %>
+  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

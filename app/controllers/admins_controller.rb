@@ -5,10 +5,12 @@ class AdminsController < ApplicationController
   before_filter :superauthenticate, :only => :destroy
   
   def generate
-    @title = "BPampm Scratchoff"
+    # render :layout => "ticket"
+    
     @campaign = Admin.find_by_subdomain!(request.subdomain)
+    @title = @campaign.pagetitle
     @choices = @campaign.prizes.where("inventory != 0")
-    @overall = @choices.count + 1
+    @overall = 1 # @choices.count + 1
     @weight = @choices.map(&:weight)
     @winner = @weight.inject(:+)
     @weight << @overall - @winner
@@ -16,7 +18,7 @@ class AdminsController < ApplicationController
                          :winmessage => "#{@campaign.losemessage}",
                          :redeemmessage => "losing ticket",
                          :inventory => 1,
-                         :image => "img/loss.png" )
+                         :image => "loss" )
     @choices << @loser
     @scratchoff = @choices.weighted_random(@weight)
     @scratchoff.inventory -= 1 unless @scratchoff.inventory.zero?
