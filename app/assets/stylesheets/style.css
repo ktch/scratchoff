@@ -231,7 +231,7 @@ td { vertical-align: top; }
 			
 			body { 
 				background: url('bpbg.jpg') bottom center no-repeat;
-				background-size:320px 740px;
+				background-size:320px;
 				color: #000;
 				margin: 5px;
 				padding: 0px;
