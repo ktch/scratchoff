@@ -1,7 +1,7 @@
 	<% if cookies[:redeemed] || cookies[:ticket] == "-1" %>
-		
-		<h3><%= raw markdown @campaign.thankyou %></a></h3>
-	
+		<header>
+			<%= raw markdown @campaign.thankyou %>
+		</header>
 	<% elsif cookies[:ticket].to_i >= 1 %>
 	
 	<% @scritchoff = Prize.find(cookies[:ticket]) %>
@@ -47,11 +47,11 @@
 			show: false
 		})
 		$('a.closemodal').click(function() {
-		   var z = confirm('By tapping OK, you acknowledge that if you are not with a prize representative, you will not receive your prize.')
+		   var z = confirm('<%= @scritchoff.suremessage %>')
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					// $.cookie('redeemed', 'true', { expires: 1 });
+					$.cookie('redeemed', 'true', { expires: 1 });
 					$.cookie('ticket', null);
 					$('a.win').remove();
 				 }
@@ -98,7 +98,7 @@
 		
 	<% else %>
 	
-	<% # cookies[:ticket] = { :value => @scratchoff.id, :expires => 10.seconds.from_now } %>
+	<% cookies[:ticket] = { :value => @scratchoff.id, :expires => 10.seconds.from_now } %>
 	
 	<header>
 		
@@ -120,7 +120,7 @@
 	<section id="redemption">
 		<p><%= raw @scratchoff.winmessage %></p>
 		<% if @scratchoff.winmessage.include? "Sorry" %>
-			<% # cookies[:redeemed] = { :value => "true", :expires => 1.day.from_now } %>
+			<% cookies[:redeemed] = { :value => "true", :expires => 1.day.from_now } %>
 		<% else %>
 		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
 		<% end %>
@@ -142,16 +142,17 @@
 			show: false
 		})
 		$('a.closemodal').click(function() {
-		   var z = confirm('By tapping OK, you acknowledge that if you are not with a prize representative, you will not receive your prize.')
+		   var z = confirm('<%= @scratchoff.suremessage %>')
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					// $.cookie('redeemed', 'true', { expires: 1 });
+					$.cookie('redeemed', 'true', { expires: 1 });
 					$('a.win').remove();
+					$('#redemption:first-child').replaceWith('<p>Thank you for playing!</p>');
 				 }
 			 else
 				 {
-					alert("You can leave this page loaded and confirm later")
+					alert("You can leave this page loaded and redeem later")
 				 }
 		});
 	</script>
