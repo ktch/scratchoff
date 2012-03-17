@@ -8,6 +8,10 @@
 	
 	<header>
 		
+		<aside id="attribution">
+			<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
+		</aside>
+		
 		<aside id="legal"><h3>Terms and Conditions</h3>
 
 		<%= raw markdown @campaign.terms %>
@@ -51,7 +55,7 @@
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					$.cookie('redeemed', 'true', { expires: 1 });
+					$.cookie('redeemed', 'true', { expires: 42 });
 					$.cookie('ticket', null);
 					$('a.win').remove();
 				 }
@@ -98,7 +102,11 @@
 		
 	<% else %>
 	
-	<% cookies[:ticket] = { :value => @scratchoff.id, :expires => 10.seconds.from_now } %>
+	<% cookies[:ticket] = { :value => @scratchoff.id, :expires => 42.days.from_now } %>
+	
+	<aside id="attribution">
+		<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
+	</aside>
 	
 	<header>
 		
@@ -120,7 +128,7 @@
 	<section id="redemption">
 		<p><%= raw @scratchoff.winmessage %></p>
 		<% if @scratchoff.winmessage.include? "Sorry" %>
-			<% cookies[:redeemed] = { :value => "true", :expires => 1.day.from_now } %>
+			<% cookies[:redeemed] = { :value => "true", :expires => 7.days.from_now } %>
 		<% else %>
 		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
 		<% end %>
@@ -146,7 +154,7 @@
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					$.cookie('redeemed', 'true', { expires: 1 });
+					$.cookie('redeemed', 'true', { expires: 42 });
 					$('a.win').remove();
 					$('#redemption p:first').replaceWith('<p>Thank you for playing!</p>');
 				 }
@@ -185,7 +193,7 @@
 	</script>
 
   <script>
-    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+    var _gaq=[["_setAccount","UA-26223809-7"],["_trackPageview"]];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));

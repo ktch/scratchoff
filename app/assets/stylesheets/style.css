@@ -243,6 +243,17 @@ td { vertical-align: top; }
 				margin: 10px;
 			}
 			
+			aside#attribution span {
+				font-size:.7em;
+				text-align:right;
+			}
+			
+			aside#attribution {
+				margin-bottom:-22px;
+				margin-top:4px;
+				margin-left:140px;
+			}
+			
 			#scratchoff {
 				position: relative;
 				margin:0 auto;
