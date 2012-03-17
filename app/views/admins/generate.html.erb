@@ -148,7 +148,7 @@
 					alert("Thank you for playing!")
 					$.cookie('redeemed', 'true', { expires: 1 });
 					$('a.win').remove();
-					$('#redemption:first-child').replaceWith('<p>Thank you for playing!</p>');
+					$('#redemption p:first').replaceWith('<p>Thank you for playing!</p>');
 				 }
 			 else
 				 {
