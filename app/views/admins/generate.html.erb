@@ -58,6 +58,7 @@
 					$.cookie('redeemed', 'true', { expires: 42 });
 					$.cookie('ticket', null);
 					$('a.win').remove();
+					$('#redemption p:first').replaceWith('<p>Thank you for playing!</p>');
 				 }
 			 else
 				 {
