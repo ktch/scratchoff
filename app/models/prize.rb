@@ -6,7 +6,7 @@ class Prize < ActiveRecord::Base
   validates :odds, :presence => true
   validates :admin_id, :presence => true
   
-  attr_accessible :name, :winmessage, :redeemmessage, :odds, :inventory, :image, :weight
+  attr_accessible :name, :winmessage, :redeemmessage, :suremessage, :odds, :inventory, :image, :weight
   
   default_scope :order => 'prizes.created_at DESC'
   
