@@ -1,7 +1,7 @@
 	<% if cookies[:redeemed] || cookies[:ticket] == "-1" %>
-		<aside id="attribution">
-			<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
-		</aside>
+		<!-- <aside id="attribution">
+					<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
+				</aside> -->
 	
 		<header>
 			<%= raw markdown @campaign.thankyou %>
@@ -10,9 +10,9 @@
 	
 	<% @scritchoff = Prize.find(cookies[:ticket]) %>
 		
-		<aside id="attribution">
-			<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
-		</aside>
+		<!-- <aside id="attribution">
+					<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
+				</aside> -->
 		
 	<header>
 		
@@ -22,7 +22,7 @@
 		
 		</aside>
 		
-		<h3>Scratch off the image below for your chance to win!</h3>
+		<h3>Scratch off the image below to reveal your prize!</h3>
 		
 	</header>
 	
@@ -62,11 +62,11 @@
 		   var z = confirm('<%= @scritchoff.suremessage %>')
 			 if (z == true)
 				 {
-					alert("Thank you for playing!")
+					alert("Thank you for participating!")
 					$.cookie('redeemed', 'true', { expires: <%= @scritchoff.expiry %> });
 					$.cookie('ticket', null);
 					$('a.win').remove();
-					$('#redemption p:first').replaceWith('<p>Thank you for playing!</p>');
+					$('#redemption p:first').replaceWith('<p>Thank you for participating!</p>');
 				 }
 			 else
 				 {
@@ -115,9 +115,9 @@
 	
 	<% @scratchoff.inventory -= 1 unless @scratchoff.inventory.zero? %>
 	
-	<aside id="attribution">
-		<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
-	</aside>
+	<!-- <aside id="attribution">
+			<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
+		</aside> -->
 	
 	<header>
 		
@@ -127,7 +127,7 @@
 		
 		</aside>
 		
-		<h3>Scratch off the image below for your chance to win!</h3>
+		<h3>Scratch off the image below to reveal your prize!</h3>
 		
 	</header>
 	
@@ -168,10 +168,10 @@
 		   var z = confirm('<%= @scratchoff.suremessage %>')
 			 if (z == true)
 				 {
-					alert("Thank you for playing!")
+					alert("Thank you for participating!")
 					$.cookie('redeemed', 'true', { expires: <%= @scratchoff.expiry %> });
 					$('a.win').remove();
-					$('#redemption p:first').replaceWith('<p>Thank you for playing!</p>');
+					$('#redemption p:first').replaceWith('<p>Thank you for participating!</p>');
 				 }
 			 else
 				 {
