@@ -28,7 +28,11 @@
 	
 	<section id="scratchoff">
 		<%= image_tag @campaign.logo_url.to_s, :title => @campaign.subdomain, :id => "latex" %>
+		<% if @scritchoff.winmessage.include? "Sorry" %>
+		<%= image_tag @campaign.loser_url.to_s, :title => "Sorry", :id => "prize" %>
+		<% else %>
 		<%= image_tag @scritchoff.image_url.to_s, :title => @scritchoff.name, :id => "prize" %>
+		<% end %>
 	</section>
 	
 	<section id="redemption">
@@ -129,7 +133,11 @@
 	
 	<section id="scratchoff">
 		<%= image_tag @campaign.logo_url.to_s, :title => @campaign.subdomain, :id => "latex" %>
+		<% if @scratchoff.winmessage.include? "Sorry" %>
+		<%= image_tag @campaign.loser_url.to_s, :title => "Sorry", :id => "prize" %>
+		<% else %>
 		<%= image_tag @scratchoff.image_url.to_s, :title => @scratchoff.name, :id => "prize" %>
+		<% end %>
 	</section>
 	
 	<section id="redemption">
