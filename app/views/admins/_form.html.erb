@@ -71,6 +71,13 @@
   </div>
 
 	<div class="field">
+    <%= f.label :loser, "Losing Image" %><br />
+		<%= image_tag(@admin.loser_url) if @admin.loser? %>
+    <%= f.file_field :loser %>
+		<%= f.hidden_field :loser_cache %>
+  </div>
+
+	<div class="field">
     <%= f.label :limit, "Required Days Between Entries" %><br />
     <%= f.number_field :limit %>
   </div>

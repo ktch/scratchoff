@@ -1,11 +1,12 @@
 class Admin < ActiveRecord::Base
   has_many :prizes, :dependent => :destroy
   attr_accessor   :password
-  attr_accessible :name, :email, :logo, :password, :password_confirmation, :subdomain, :terms, :sponsor, :losemessage, :thankyou, :logo_cache, :sponsor_cache, :pagetitle, :background, :bgcolor, :linkcolor, :fontcolor, :background_cache, :limit
+  attr_accessible :name, :email, :logo, :password, :password_confirmation, :subdomain, :terms, :sponsor, :losemessage, :thankyou, :logo_cache, :sponsor_cache, :pagetitle, :background, :bgcolor, :linkcolor, :fontcolor, :background_cache, :limit. :loser, :loser_cache
   
   mount_uploader :sponsor, SponsorUploader
   mount_uploader :logo, LogoUploader
   mount_uploader :background, BackgroundUploader
+  mount_uploader :loser, LoserUploader
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
