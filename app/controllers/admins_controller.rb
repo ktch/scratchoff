@@ -18,7 +18,8 @@ class AdminsController < ApplicationController
                          :winmessage => "#{@campaign.losemessage}",
                          :redeemmessage => "losing ticket",
                          :inventory => 1,
-                         :image => "loss" )
+                         :image => "loss",
+                         :expiry => @campaign.limit )
     @choices << @loser
     @scratchoff = @choices.weighted_random(@weight)
     @scratchoff.save

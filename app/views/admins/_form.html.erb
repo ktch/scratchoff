@@ -70,6 +70,10 @@
 		<%= f.hidden_field :sponsor_cache %>
   </div>
 
+	<div class="field">
+    <%= f.label :limit, "Required Days Between Entries" %><br />
+    <%= f.number_field :limit %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>
