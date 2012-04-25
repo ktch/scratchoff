@@ -307,11 +307,10 @@ td { vertical-align: top; }
 			header {
 				width: 290px;
 				padding:0px 15px 15px 15px;
-				margin:0 auto;
+				margin:20px auto 0px auto;
 			}
 			
 			header h3 {
-				margin: 20px 0px 5px 0px;
 				text-shadow: black 0.1em 0.1em 0.2em
 			}
 
