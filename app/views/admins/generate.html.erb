@@ -44,7 +44,7 @@
 	</section>
 	
 	<div id="redeem_pane" class="modal hide fade in">
-		<p><%= @scritchoff.redeemmessage %></p>
+		<p><%= raw @scritchoff.redeemmessage %></p>
 		<p class="warning">DO NOT TAP REDEEM UNTIL YOU ARE WITH A PRIZE REPRESENTATIVE!</p>
 		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
 		
@@ -150,7 +150,7 @@
 	</section>
 	
 	<div id="redeem_pane" class="modal hide fade in">
-		<p><%= @scratchoff.redeemmessage %></p>
+		<p><%= raw @scratchoff.redeemmessage %></p>
 		<p class="warning">DO NOT TAP REDEEM UNTIL YOU ARE WITH A PRIZE REPRESENTATIVE!</p>
 		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
 		
