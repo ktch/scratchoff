@@ -22,7 +22,7 @@
 		
 		</aside>
 		
-		<h3>Scratch off the logo below for your chance to win!</h3>
+		<h3>Scratch off the image below for your chance to win!</h3>
 		
 	</header>
 	
@@ -59,7 +59,7 @@
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					$.cookie('redeemed', 'true', { expires: 42 });
+					$.cookie('redeemed', 'true', { expires: <%= @scritchoff.expiry %> });
 					$.cookie('ticket', null);
 					$('a.win').remove();
 					$('#redemption p:first').replaceWith('<p>Thank you for playing!</p>');
@@ -107,7 +107,9 @@
 		
 	<% else %>
 	
-	<% cookies[:ticket] = { :value => @scratchoff.id, :expires => 42.days.from_now } %>
+	<% cookies[:ticket] = { :value => @scratchoff.id, :expires => @scratchoff.expiry.days.from_now } %>
+	
+	<% @scratchoff.inventory -= 1 unless @scratchoff.inventory.zero? %>
 	
 	<aside id="attribution">
 		<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
@@ -121,7 +123,7 @@
 		
 		</aside>
 		
-		<h3>Scratch off the logo below for your chance to win!</h3>
+		<h3>Scratch off the image below for your chance to win!</h3>
 		
 	</header>
 	
@@ -133,7 +135,7 @@
 	<section id="redemption">
 		<p><%= raw @scratchoff.winmessage %></p>
 		<% if @scratchoff.winmessage.include? "Sorry" %>
-			<% cookies[:redeemed] = { :value => "true", :expires => 7.days.from_now } %>
+			<% cookies[:redeemed] = { :value => "true", :expires => @scratchoff.expiry.days.from_now } %>
 		<% else %>
 		<p><a data-toggle="modal" data-target="#redeem_pane" class="win"> Redeem Now! </a></p>
 		<% end %>
@@ -159,7 +161,7 @@
 			 if (z == true)
 				 {
 					alert("Thank you for playing!")
-					$.cookie('redeemed', 'true', { expires: 42 });
+					$.cookie('redeemed', 'true', { expires: <%= @scratchoff.expiry %> });
 					$('a.win').remove();
 					$('#redemption p:first').replaceWith('<p>Thank you for playing!</p>');
 				 }

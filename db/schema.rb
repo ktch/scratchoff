@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317122138) do
+ActiveRecord::Schema.define(:version => 20120425041536) do
 
   create_table "admins", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(:version => 20120317122138) do
     t.text     "losemessage"
     t.text     "thankyou"
     t.string   "pagetitle"
+    t.string   "background"
+    t.string   "bgcolor"
+    t.string   "fontcolor"
+    t.string   "linkcolor"
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
@@ -44,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120317122138) do
     t.integer  "admin_id"
     t.float    "weight"
     t.string   "suremessage"
+    t.integer  "expiry"
   end
 
   add_index "prizes", ["admin_id"], :name => "index_prizes_on_admin_id"

@@ -67,5 +67,8 @@ end
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
 #  admin_id      :integer
+#  weight        :float
+#  suremessage   :string(255)
+#  expiry        :integer
 #
 

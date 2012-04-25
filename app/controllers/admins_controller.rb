@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
   # before_filter :is_campaign?
-  before_filter :authenticate, :only  => [:index, :edit, :update, :destroy, :dashboard]
-  before_filter :correct_admin, :only => [:edit, :update, :dashboard]
+  before_filter :authenticate, :only  => [:index, :edit, :show, :update, :destroy]
+  before_filter :correct_admin, :only => [:edit, :show, :update]
   before_filter :superauthenticate, :only => :destroy
   
   def generate
@@ -21,7 +21,6 @@ class AdminsController < ApplicationController
                          :image => "loss" )
     @choices << @loser
     @scratchoff = @choices.weighted_random(@weight)
-    @scratchoff.inventory -= 1 unless @scratchoff.inventory.zero?
     @scratchoff.save
     # cookies[:redeemed] = "not_redeemed"
   end
@@ -40,12 +39,13 @@ class AdminsController < ApplicationController
   end
   
   def dashboard
-    @admin = current_admin
-    @prizes = @admin.prizes
-    @title = "Scratchoff Dashboard - #{@admin.subdomain}"
+    render :layout => "application"
+    @prizes = current_admin.prizes
+    @title = "Scratchoff Dashboard - #{current_admin.subdomain}"
   end
   
   def show
+    render :layout => "application"
     @admin = Admin.find(params[:id])
     @title = @admin.name
   end
@@ -67,6 +67,7 @@ class AdminsController < ApplicationController
   end
   
   def edit
+    render :layout => "application"
     @admin = Admin.find(params[:id])
     @title = "Account Update"
   end

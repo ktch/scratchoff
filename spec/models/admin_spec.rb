@@ -211,5 +211,14 @@ end
 #  encrypted_password :string(255)
 #  salt               :string(255)
 #  super              :boolean         default(FALSE)
+#  subdomain          :string(255)
+#  terms              :text
+#  sponsor            :string(255)
+#  losemessage        :text
+#  thankyou           :text
+#  pagetitle          :string(255)
+#  background         :string(255)
+#  bgcolor            :string(255)
+#  fontcolor          :string(255)
 #
 

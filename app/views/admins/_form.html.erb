@@ -13,6 +13,24 @@
     <%= f.label :pagetitle, "Page Title" %><br />
     <%= f.text_field :pagetitle %>
   </div>
+	<div class="field">
+    <%= f.label :background, "Background Image" %><br />
+		<%= image_tag(@admin.background_url) if @admin.background? %>
+    <%= f.file_field :background %>
+		<%= f.hidden_field :background_cache %>
+  </div>
+	<div class="field">
+    <%= f.label :bgcolor, "Background Color" %><br />
+    <%= f.text_field :bgcolor %>
+  </div>
+	<div class="field">
+    <%= f.label :fontcolor, "Font Color" %><br />
+    <%= f.text_field :fontcolor %>
+  </div>
+	<div class="field">
+    <%= f.label :linkcolor, "Link Color" %><br />
+    <%= f.text_field :linkcolor %>
+  </div>
   
 
 	<div class="field">

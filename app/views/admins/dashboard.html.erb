@@ -1,6 +1,6 @@
-<h1><%= @admin.subdomain %></h1>
-<p><%= @admin.name %>'s Dashboard</p>
+<h1><%= current_admin.subdomain %></h1>
+<p><%= current_admin.name %>'s Dashboard</p>
 
-<% if @admin.prizes.any? %>
-	<%= render @prizes %>
+<% if current_admin.prizes.any? %>
+	
 <% end %>

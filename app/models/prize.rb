@@ -5,8 +5,9 @@ class Prize < ActiveRecord::Base
   validates :redeemmessage, :presence => true
   validates :odds, :presence => true
   validates :admin_id, :presence => true
+  validates :expiry, :presence => true
   
-  attr_accessible :name, :winmessage, :redeemmessage, :suremessage, :odds, :inventory, :image, :weight
+  attr_accessible :name, :winmessage, :redeemmessage, :suremessage, :odds, :inventory, :image, :weight, :expiry
   
   default_scope :order => 'prizes.created_at DESC'
   
@@ -51,6 +52,7 @@ class Prize < ActiveRecord::Base
   
 end
 # == Schema Information
+#
 # Table name: prizes
 #
 #  id            :integer         not null, primary key
@@ -63,5 +65,8 @@ end
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
 #  admin_id      :integer
+#  weight        :float
+#  suremessage   :string(255)
+#  expiry        :integer
 #
 
