@@ -5,6 +5,7 @@
   <%= csrf_meta_tags %>
 	<%= render 'shared/header' %>
 	
+	<% if @campaign %>
 	<style type="text/css" media="screen">
 		body {
 			background: <%= @campaign.bgcolor %> url('<%= @campaign.background %>') center bottom no-repeat; 
@@ -15,6 +16,7 @@
 			color: <%= @campaign.linkcolor %>;
 		}
 	</style>
+	<% end %>
 	
 </head>
 <body onload="setTimeout(function() { window.scrollTo(0, 1) }, 100);">
@@ -24,8 +26,6 @@
 	<% end %>
 
 	<%= yield %>
-	
-	<!-- <%= debug(params) if Rails.env.development? %> -->
 
 </body>
 </html>

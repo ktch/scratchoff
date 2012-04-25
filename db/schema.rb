@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425051653) do
+ActiveRecord::Schema.define(:version => 20120425053221) do
 
   create_table "admins", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120425051653) do
     t.string   "fontcolor"
     t.string   "linkcolor"
     t.integer  "limit"
+    t.string   "loser"
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
