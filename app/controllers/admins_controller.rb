@@ -22,7 +22,6 @@ class AdminsController < ApplicationController
                          :expiry => @campaign.limit )
     @choices << @loser
     @scratchoff = @choices.weighted_random(@weight)
-    @scratchoff.save
     # cookies[:redeemed] = "not_redeemed"
   end
   
