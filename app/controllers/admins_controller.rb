@@ -10,7 +10,7 @@ class AdminsController < ApplicationController
     @campaign = Admin.find_by_subdomain!(request.subdomain)
     @title = @campaign.pagetitle
     @choices = @campaign.prizes.where("inventory != 0")
-    @overall = 1 # @choices.count + 1
+    @overall = 1.0 # @choices.count + 1
     @weight = @choices.map(&:weight)
     @winner = @weight.inject(:+)
     @weight << @overall - @winner
