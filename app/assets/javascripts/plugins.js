@@ -305,9 +305,10 @@ window.log = function(){
 					$this.after( $canvas );
 					canvas.id = this.id;
 					canvas.className = this.className;
-					canvas.width = width;
-					canvas.height = height;
+					canvas.width = width * 2;
+					canvas.height = height * 2;
 					ctx.drawImage( this, 0, 0 );
+					ctx.scale(2, 2);
 					$this.remove();
 
 					// prepare context for drawing operations

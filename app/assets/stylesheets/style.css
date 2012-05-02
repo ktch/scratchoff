@@ -294,6 +294,7 @@ td { vertical-align: top; }
 			#prize {
 				position: absolute;
 				width: 200px;
+				height:200px;
 				top: 0px;
 				left: 0px;
 				z-index: 1;
