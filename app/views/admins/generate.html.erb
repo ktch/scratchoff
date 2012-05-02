@@ -1,7 +1,4 @@
 	<% if cookies[:redeemed] || cookies[:ticket] == "-1" %>
-		<!-- <aside id="attribution">
-					<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
-				</aside> -->
 	
 		<header>
 			<%= raw markdown @campaign.thankyou %>
@@ -10,19 +7,9 @@
 	
 	<% @scritchoff = Prize.find(cookies[:ticket]) %>
 		
-		<!-- <aside id="attribution">
-					<span>powered by <a href="http://mobilezen.com/scratchoff">mobilezen Scratchoff</a></span>
-				</aside> -->
-		
 	<header>
-		
-		<aside id="legal">
 
 		<%= raw markdown @campaign.terms %>
-		
-		</aside>
-		
-		<h3>Scratch off the image below to reveal your prize!</h3>
 		
 	</header>
 	
@@ -49,7 +36,7 @@
 		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
 		
 		<p>Brought to you by:</p>
-		<%= image_tag @campaign.sponsor_url.to_s, :title => @campaign.subdomain, :class => "sponsorimg" %>
+		<%= image_tag @campaign.sponsor_url.to_s, :title => @campaign.subdomain, :class => "redeem_img" %>
 	</div>
 	
 	<script type="text/javascript" charset="utf-8">
@@ -121,14 +108,8 @@
 		</aside> -->
 	
 	<header>
-		
-		<aside id="legal">
 
 		<%= raw markdown @campaign.terms %>
-		
-		</aside>
-		
-		<h3>Scratch off the image below to reveal your prize!</h3>
 		
 	</header>
 	
@@ -156,7 +137,7 @@
 		<a class="win closemodal" data-dismiss="modal" href="#survey">Redeem</a>
 		
 		<p>Brought to you by:</p>
-		<%= image_tag @campaign.sponsor_url.to_s, :title => @campaign.subdomain, :class => "sponsorimg" %>
+		<%= image_tag @campaign.sponsor_url.to_s, :title => @campaign.subdomain, :class => "redeem_img" %>
 	</div>
 	
 	<script type="text/javascript" charset="utf-8">
