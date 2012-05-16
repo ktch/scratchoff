@@ -40,9 +40,15 @@
 	
 <br />
 	
-	<a href="#" id="call_to_action">Get Yours Today</a>
+	<a href="#" id="call_to_action">Create Your Own</a>
 		
-		
+	<script type="text/javascript">
+		$(function() {
+		 $('#call_to_action').click(function() {
+			$('#call_to_action').html('Call mobilezen at 877.229.9699');
+		});
+		});
+	</script>
 		
 		
 	<!-- <h2 id="scroll"> Scroll down to play.</h2> -->
@@ -72,7 +78,11 @@
 		
 </div>
 
-<video id="video" preload="true" autoplay=""><source src="/video/background.m4v" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"></video>
+<video id="video" preload="true" autoplay="">
+	<source src="/video/background.m4v" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
+	<source src="/video/background.ogv" type="video/ogv">
+	<source src="/video/background.webm" type="video/webm">
+</video>
 
 <h6>&copy; 2012 <!-- <a href="http://thekitchen.co">the kitchen</a> --></h6>
 
@@ -148,14 +158,6 @@
 	});
 </script>
 
-
-
-
-
-
-
-
-	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 
 </body>
