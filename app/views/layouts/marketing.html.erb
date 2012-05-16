@@ -20,7 +20,7 @@
 </head>
 
 
-<body>
+<body onload="setTimeout(function() { window.scrollTo(0, 1) }, 100);">
 
 
 <!--
@@ -32,7 +32,7 @@
 
 <a href="/signin" id="login">Log In</a>
 
-
+<div id="container_container">
 <div id="container">
 	
 	<img src="images/logo.png" class="resize">
@@ -74,12 +74,6 @@
 		<br />
 			
 	<h5>Works on iOS &amp; (most) Android devices</h5>
-
-
-	<h6>&copy; 2012 <!-- <a href="http://thekitchen.co">the kitchen</a> --></h6>
-
-
-	<a href="http://thekitchen.co"><img src="/images/served_by_the_kitchen.png" id="kitchen" width="102" height="48" alt="Served By The Kitchen"></a>
 		
 </div>
 
@@ -88,8 +82,15 @@
 	<source src="/video/background.ogv" type="video/ogv">
 	<source src="/video/background.webm" type="video/webm">
 </video>
-		
-		
+
+
+
+<h6>&copy; 2012 <!-- <a href="http://thekitchen.co">the kitchen</a> --></h6>
+
+
+<a href="http://thekitchen.co"><img src="/images/served_by_the_kitchen.png" id="kitchen" width="102" height="48" alt="Served By The Kitchen"></a>
+
+</div>
 
 <script type="text/javascript" charset="utf-8">
 		$('#redeem_pane').modal({

@@ -85,7 +85,7 @@ h6 {
 	line-height:20px;
 	color: #A0A0A0;
 	position: absolute;
-	bottom: 10px;
+	bottom: -358px;
 	left: 20px;
 }
 
@@ -97,7 +97,8 @@ p#for_details {
 	display:block;
 	text-align:center;
 	font-weight:bold;
-	padding:15px;
+	margin-top:0;
+	padding:0 15px 15px 15px;
 }
 
 p{
@@ -150,9 +151,8 @@ p#click_here {
 
 #kitchen {
 	position:absolute;
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
+	bottom: -350px;
+	right: 10px;
 }
 
 #redemption {
@@ -303,6 +303,10 @@ a.win {
 		border-bottom:4px solid #8CC850;
 		padding-bottom:15px;
 		display:block;
+	}
+	
+	h6 {
+		bottom:0;
 	}
 	
 	#kitchen {
