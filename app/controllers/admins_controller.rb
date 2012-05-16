@@ -26,6 +26,7 @@ class AdminsController < ApplicationController
   end
   
   def marketing
+    render :layout => "marketing"
     @title ="Welcome to mobilezen Scratchoff!"
   end
   

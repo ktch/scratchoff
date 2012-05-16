@@ -1,0 +1,162 @@
+<!DOCTYPE html public>
+<html>
+<head>
+
+
+<title>Scratchoff.me</title>
+
+<meta charset="utf-8">
+
+    <%= stylesheet_link_tag 'marketing' %>
+		<%= javascript_include_tag 'application' %>
+
+		<script type="text/javascript" src="http://use.typekit.com/urc0rnt.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		
+		
+
+</head>
+
+
+<body>
+
+
+<!--
+<div id="help_about">   
+<a href="#" >Help</a> |  
+<a href="#" >About</a>
+</div>
+-->
+
+<a href="/signin" id="login">Log In</a>
+
+
+<div id="container">
+	
+	<img src="images/logo.png" class="resize">
+
+
+	<h2 id="main_copy">The first customizable scratch off game for the mobile web.</h2>
+	
+<br />
+	
+	<a href="#" id="call_to_action">Get Yours Today</a>
+		
+		
+		
+		
+	<!-- <h2 id="scroll"> Scroll down to play.</h2> -->
+			
+	
+	<p id="for_details">Scratch off the image below to see how it works.</p>
+		
+		
+		
+		<section id="scratchoff">
+		<img src="/images/scratchoff_image.png" id="latex">
+		<img src="/images/scratchoff_win.png" alt="Get Your Own Custom Game" id="prize"  title="Get Your Own Custom Game">
+		<br />
+		</section>
+		
+		<section id="redemption">
+				<p id="click_below">Set up your own custom</br>prizes and odds!</p>
+				<p id="click_here"><a href="tel:4048690333" data-toggle="modal" data-target="#redeem_pane" id="click_here" class="win">Call Us</a></p>
+			</section>
+		
+		<br />
+			
+	<h5>Works on iOS &amp; (most) Android devices</h5>
+
+
+
+		
+</div>
+
+<video id="video" preload="true" autoplay=""><source src="/video/background.m4v" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"></video>
+
+<h6>&copy; 2012 <!-- <a href="http://thekitchen.co">the kitchen</a> --></h6>
+
+
+<a href="http://thekitchen.co"><img src="/images/served_by_the_kitchen.png" id="kitchen" width="102" height="48" alt="Served By The Kitchen"></a>
+		
+		
+
+<script type="text/javascript" charset="utf-8">
+		$('#redeem_pane').modal({
+			backdrop: true,
+		  keyboard: true,
+			show: false
+		})
+		$('a.closemodal').click(function() {
+		   var z = confirm('')
+			 if (z == true)
+				 {
+					alert("Thank you for participating!")
+					$.cookie('redeemed', 'true', { expires: 0 });
+					$('a.win').remove();
+					$('#redemption p:first').replaceWith('<p>Thank you for participating!</p>');
+				 }
+			 else
+				 {
+					alert("You can leave this page loaded and redeem later")
+				 }
+		});
+	</script>
+
+	<script type = 'text/javascript'>
+
+		function showRedeemButton() {
+			$('#redemption').delay(800).animate({opacity: 1}, 1200, function(){});
+		}
+
+		function init(event) {
+			$("#latex").eraser({
+			    completeRatio: .5,
+			    completeFunction: showRedeemButton
+			});
+		}
+		
+		
+		addEventListener( "load", init, false );
+
+		function remove(event) {
+			$("#latex").eraser('clear');
+			event.preventDefault();
+		}
+
+		function reset(event) {
+			$("#latex").eraser('reset');
+			event.preventDefault();
+		}
+
+	</script>
+
+  <script>
+    var _gaq=[["_setAccount","UA-26223809-7"],["_trackPageview"]];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));
+  </script>
+
+
+
+<!-- VIDEO-->
+<script type="text/javascript">
+	Event.observe(window, 'load', function(e){
+		var video = new Videoplayer(2);
+		var customopacity = new CustomOpacity($H({elements:'.img',opacityLow:0.7,opacityHigh:0.99,name:'random'}));
+	});
+</script>
+
+
+
+
+
+
+
+
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+
+</body>
+</html>
