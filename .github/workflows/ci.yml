@@ -1,0 +1,156 @@
+# Fleet CI: the existing organization-repo exception to the private shared workflow.
+# Snapshot of zachphillips/ibsky/.github/workflows/base.yml; no deploy steps.
+name: CI
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect stack
+        id: detect
+        run: |
+          {
+            echo "node=$([ -f package.json ] && echo true || echo false)"
+            echo "python=$([ -f pyproject.toml ] && echo true || echo false)"
+            # The lockfile picks the package manager, so CI installs exactly what the repo locked.
+            echo "pm=$([ -f pnpm-lock.yaml ] && echo pnpm || echo npm)"
+          } >> "$GITHUB_OUTPUT"
+
+      # ---------- Node ----------
+      - uses: actions/setup-node@v4
+        if: steps.detect.outputs.node == 'true'
+        with:
+          node-version: 22
+
+      - name: Install pnpm (pnpm repos)
+        if: steps.detect.outputs.node == 'true' && steps.detect.outputs.pm == 'pnpm'
+        run: |
+          # The version package.json pins ("pnpm@10.28.2", any "+sha" suffix dropped), else pnpm 10.
+          spec=$(node -p "(require('./package.json').packageManager || 'pnpm@10').split('+')[0]")
+          case "$spec" in pnpm@*) ;; *) spec=pnpm@10 ;; esac
+          npm install -g "$spec"
+
+      - name: Install (node)
+        if: steps.detect.outputs.node == 'true'
+        run: |
+          if [ "${{ steps.detect.outputs.pm }}" = pnpm ]; then pnpm install --frozen-lockfile
+          elif [ -f package-lock.json ]; then npm ci; else npm install; fi
+
+      - name: Lint / typecheck (node, if present)
+        if: steps.detect.outputs.node == 'true'
+        env:
+          PM: ${{ steps.detect.outputs.pm }}
+        run: |
+          $PM run --if-present lint
+          $PM run --if-present typecheck
+
+      - name: Test (node, if any tests remain)
+        if: steps.detect.outputs.node == 'true'
+        env:
+          PM: ${{ steps.detect.outputs.pm }}
+        run: |
+          if [ -z "$(node -p "require('./package.json').scripts?.test ?? ''")" ]; then
+            echo "No test script. Under Proof, not tests, that is a pass."
+            exit 0
+          fi
+          # First try with vitest-style flags: --run stops watch mode and
+          # --passWithNoTests makes an empty suite a pass (vitest and jest both
+          # honor it; node --test ignores trailing flags and passes on an empty
+          # glob by itself). A script that rejects the flags gets a plain retry,
+          # which is how this step has always worked. Real failures fail both.
+          # pnpm hands a literal "--" to the script, so pnpm gets the flags bare.
+          if [ "$PM" = pnpm ]; then pnpm run test --run --passWithNoTests 2>/dev/null || pnpm run test
+          else npm run test -- --run --passWithNoTests 2>/dev/null || npm run test; fi
+
+      - name: Build (node, if present)
+        if: steps.detect.outputs.node == 'true'
+        env:
+          PM: ${{ steps.detect.outputs.pm }}
+        run: $PM run --if-present build
+
+      # ---------- Verify (opt-in: package.json "verify:ci") ----------
+      - name: Detect verify:ci
+        id: verify
+        if: steps.detect.outputs.node == 'true'
+        env:
+          PM: ${{ steps.detect.outputs.pm }}
+        run: |
+          has=$(node -p "Boolean(require('./package.json').scripts?.['verify:ci'])")
+          echo "enabled=$has" >> "$GITHUB_OUTPUT"
+          if [ "$has" != true ]; then exit 0; fi
+          # The installed Playwright version keys the browser cache. It is empty
+          # when the repo does not depend on Playwright, and then no browsers are
+          # installed. `npm exec --no` runs only the local bin; without --no,
+          # npm in CI would fetch Playwright from the registry instead.
+          if [ "$PM" = pnpm ]; then pw=$(pnpm exec playwright --version 2>/dev/null || true)
+          else pw=$(npm exec --no -- playwright --version 2>/dev/null || true); fi
+          echo "playwright=${pw##* }" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        if: steps.verify.outputs.enabled == 'true' && steps.verify.outputs.playwright != ''
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.verify.outputs.playwright }}-chromium
+
+      - name: Install Playwright browsers
+        if: steps.verify.outputs.enabled == 'true' && steps.verify.outputs.playwright != ''
+        env:
+          PM: ${{ steps.detect.outputs.pm }}
+          BROWSERS: chromium
+        run: |
+          # Word splitting on $BROWSERS is the point: "chromium webkit" is two browsers.
+          # shellcheck disable=SC2086
+          if [ "$PM" = pnpm ]; then pnpm exec playwright install --with-deps $BROWSERS
+          else npm exec --no -- playwright install --with-deps $BROWSERS; fi
+
+      - name: Verify (verify:ci)
+        if: steps.verify.outputs.enabled == 'true'
+        env:
+          PM: ${{ steps.detect.outputs.pm }}
+        run: $PM run verify:ci
+
+      # ---------- Python ----------
+      - uses: actions/setup-python@v5
+        if: steps.detect.outputs.python == 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Lint / test (python, if present)
+        if: steps.detect.outputs.python == 'true'
+        run: |
+          pip install --quiet ruff pytest
+          ruff check . || true   # advisory until repos adopt a ruff config
+          if [ -z "$(find . -path ./node_modules -prune -o -path ./.venv -prune -o -type f \( -name 'test_*.py' -o -name '*_test.py' \) -print -quit)" ]; then
+            echo "No Python tests. Under Proof, not tests, that is a pass."
+            exit 0
+          fi
+          # pytest exit 5 = "collected no tests": a pass. Any other non-zero fails.
+          status=0
+          pytest -q || status=$?
+          if [ "$status" -eq 5 ]; then echo "pytest collected no tests. Passing."; exit 0; fi
+          exit "$status"
+
+      # ---------- Gap report ----------
+      - name: Report missing checks
+        if: always()
+        run: |
+          missing=""
+          if [ -f package.json ]; then
+            for s in lint typecheck build; do
+              node -e "process.exit(require('./package.json').scripts?.['$s'] ? 0 : 1)" || missing="$missing $s"
+            done
+            node -e "process.exit(require('./package.json').scripts?.['verify:ci'] ? 0 : 1)" \
+              || echo "::notice::No verify:ci script, so CI does not drive the app. Proof for behavior changes lives in each PR's Proof section."
+          fi
+          if [ -n "$missing" ]; then
+            echo "::warning::Missing checks:$missing."
+          fi
